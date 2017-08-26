@@ -1,0 +1,129 @@
+:global {
+  .fn-clear {
+    *zoom: 1;
+  }
+
+  body {
+    min-width: 1200px;
+  }
+
+  .fn-clear:after,
+  .fn-clear:before {
+    content: '';
+    display: table;
+  }
+
+  .fn-clear:after {
+    clear: both;
+  }
+
+  .fn-left {
+    float: left;
+  }
+
+  .fn-right {
+    float: right;
+  }
+
+  .fn-hide {
+    display: none;
+  }
+
+  .fn-show {
+    display: block;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  *,
+  :after,
+  :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  }
+
+  .no-select {
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .no-appear {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+  }
+
+  .no-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  }
+
+  #root,
+  body,
+  html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+  }
+  /*自定义的样式覆盖antd默认  */
+
+  .ant-layout-footer {
+    background-color: rgba(0, 0, 0, 0.8)!important;
+  }
+
+  .ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background-color: transparent!important;
+  }
+
+  .ant-menu.ant-menu-dark .ant-menu-item-selected a {
+    color: #108EE9!important;
+  }
+
+  .ant-layout-header {
+    background-color: rgba(0, 0, 0, 0.8)!important;
+  }
+
+  .ant-table-wrapper.announcement table tr {
+    &:hover {
+      td {
+        background-color: #446379;
+      }
+    }
+  }
+
+  .ant-table-wrapper.announcement table td {
+    color: #fff;
+    border: none;
+    padding: 8px;
+
+    a {
+      color: #fff;
+    }
+  }
+}

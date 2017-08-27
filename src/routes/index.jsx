@@ -28,11 +28,13 @@ const Index = ({ dispatch, items, className }) => {
                     </div>
                 </div>
                 <div className={styles.float_2}>
-                    <Carousel autoplay>
-                        <div> <img src={img_1} alt="" /></div>
-                        <div> <img src={img_2} alt="" /></div>
-                        <div> <img src={img_3} alt="" /></div>
-                    </Carousel>
+                    <div style={{ width: "615px" }}>
+                        <Carousel autoplay>
+                            <div> <img src={img_1} alt="" /></div>
+                            <div> <img src={img_2} alt="" /></div>
+                            <div> <img src={img_3} alt="" /></div>
+                        </Carousel>
+                    </div>
                 </div>
             </div>
             <div className={styles.flexBox} style={{ marginTop: "3px" }}>
@@ -69,6 +71,13 @@ const Index = ({ dispatch, items, className }) => {
                     </div>
                 </div>
             </div>
+            {/* <div style={{ border: "1px solid red", width: "624px" }}>
+                <Carousel autoplay>
+                    <div> <img src={img_1} alt="" /></div>
+                    <div> <img src={img_2} alt="" /></div>
+                    <div> <img src={img_3} alt="" /></div>
+                </Carousel>
+            </div> */}
         </div>
     );
 };

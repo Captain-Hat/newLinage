@@ -2,48 +2,92 @@ let list = [
     {
         item: "服务器启动错误解决方法",
         date: "2017.8.20",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         id: 1
     },
     {
         item: "5月4日(周四)全区全服例行维护结束公告",
         date: "2017.8.20",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         id: 2
     },
     {
         item: "服务器启动错误解决方法",
         date: "2017.8.20",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         id: 3
     },
     {
         item: "5月4日(周四)全区全服例行维护结束公告",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 4
     },
     {
         item: "服务器启动错误解决方法",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 5
     },
     {
         item: "5月4日(周四)全区全服例行维护结束公告",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 6
     },
     {
         item: "服务器启动错误解决方法",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 7
     },
     {
         item: "5月4日(周四)全区全服例行维护结束公告",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 8
     },
     {
         item: "5月4日(周四)全区全服例行维护结束公告",
+        img: "http://pic.duowan.com/df/1104/166256478415/166256500012.jpg",
+        desc: "这是一件毁天灭地的装备，找GM购买只需998.",
         date: "2017.8.20",
         id: 9
     },
+]
+let list2 = [
+    {
+        ac: '3',
+        safe: "5",
+        type: "6",
+        id: 0
+    },
+    {
+        ac: '3',
+        safe: "5",
+        type: "6",
+        id: 1
+    },
+    {
+        ac: '3',
+        safe: "5",
+        type: "6",
+        id: 2
+    },
+    {
+        ac: '3',
+        safe: "5",
+        type: "6",
+        id: 3
+    }
 ]
 
 
@@ -52,6 +96,7 @@ export default {
     'GET /api/users': list,
     'post /api/sumit': { errcode: 1, msg: "success" },
     'post /api/users': { errcode: 1, data: list, option: { total: 100 }, msg: "success" },
+    'post /api/detail': { errcode: 1, data: list2, option: { total: 100 }, msg: "success" },
 
     // GET POST 可省略
     '/api/users/1': { id: 1 },

@@ -2,4 +2,26 @@
   width: 1000px;
   height: 820px;
   background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+}
+
+.menu {
+  line-height: 40px;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.submenu {
+  line-height: 40px;
+  background-color: transparent;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.leftCol {
+  width: 40px;
+}
+
+.rightCol {
+  color: #fff;
 }

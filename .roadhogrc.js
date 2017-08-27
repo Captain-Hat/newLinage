@@ -19,7 +19,7 @@ export default {
   env: {
     production: {
       multipage: true,
-      publicPath: '/'
+      publicPath: '/newlineage/'
     },
     development: {
       multipage: false,

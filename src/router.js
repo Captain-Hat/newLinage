@@ -18,6 +18,8 @@ import AnnouncementList from "./routes/AnnouncementList.js";
 
 import EquipDetail from "./routes/EquipDetail.js";
 
+import Tosell from "./routes/Tosell.js";
+
 function RouterConfig({
   history
 }) {
@@ -36,6 +38,7 @@ function RouterConfig({
         <Route path="/guide" component={Guide} />
         <Route path="/announcementList" component={AnnouncementList} />
         <Route path="/equipDetail" component={EquipDetail} />
+        <Route path="/Tosell" component={Tosell} />
       </Route>
     </Router>
   );

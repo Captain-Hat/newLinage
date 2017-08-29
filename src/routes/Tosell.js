@@ -1,5 +1,5 @@
 
-import styles from './Market.less';
+import styles from './Tosell.less';
 import React, { Component } from 'react'
 import { Input, Table, Pagination, message, Menu, Button, Tooltip } from 'antd';
 import axios from "axios";
@@ -129,21 +129,8 @@ class LensList extends Component {
 
     return (
       <div className={styles.normal}>
-        <div className={styles.purse}>
-          我的钱包：
-          <span className={styles.money}>
-            <Tooltip placement="bottom" title="捐赠币">
-              <img src={rmb} alt="" />
-            </Tooltip>
-            <span>2222</span>
-          </span>
-          <span className={styles.money}>
-            <Tooltip placement="bottom" title="游戏币">
-              <img src={gb} alt="" />
-            </Tooltip>
-            <span>2222</span>
-          </span>
-          <Link to="/Tosell?id=1"><Button type="primary">我要上架</Button></Link>
+        <div className={styles.switch}>
+
         </div>
 
         <Menu
@@ -154,19 +141,16 @@ class LensList extends Component {
           onClick={this.changeItem.bind(this, false)}
         >
           <Menu.Item key="武器">
-            <a href="javascript:;">武器</a>
+            <a href="javascript:;">仓库物品</a>
           </Menu.Item>
           <Menu.Item key="防具">
-            <a href="javascript:;">防具</a>
+            <a href="javascript:;">正在出售</a>
           </Menu.Item>
           <Menu.Item key="怪物">
-            <a href="javascript:;">怪物</a>
-          </Menu.Item>
-          <Menu.Item key="其他">
-            <a href="javascript:;">其他</a>
+            <a href="javascript:;">交易历史</a>
           </Menu.Item>
         </Menu>
-        <Menu
+        {/* <Menu
           className={styles.menu}
           theme="dark"
           mode="horizontal"
@@ -174,7 +158,7 @@ class LensList extends Component {
           onClick={this.changeItem.bind(this, true)}
         >
           {this.state.subMenu}
-        </Menu>
+        </Menu> */}
         <Table
           className="equipment"
           dataSource={this.state.tableDataSource}

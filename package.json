@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "roadhog build", 
+    "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "start": "roadhog server"
   },
@@ -17,7 +17,8 @@
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-lz-editor": "^0.11.4"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

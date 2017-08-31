@@ -17,7 +17,7 @@ app.use(Loading({
 }));
 
 // 3. Model 
-app.model(require('./models/index.js')); 
+app.model(require('./models/index.js'));
 
 app.model(require("./models/main"));
 

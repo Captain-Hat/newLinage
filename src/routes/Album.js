@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { connect } from 'dva';
 import styles from './Album.css';
 

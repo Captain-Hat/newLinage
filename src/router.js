@@ -20,6 +20,8 @@ import EquipDetail from "./routes/EquipDetail.js";
 
 import Tosell from "./routes/Tosell.js";
 
+import AddAnnouncement from "./routes/AddAnnouncement.js";
+
 function RouterConfig({
   history
 }) {
@@ -39,6 +41,7 @@ function RouterConfig({
         <Route path="/announcementList" component={AnnouncementList} />
         <Route path="/equipDetail" component={EquipDetail} />
         <Route path="/Tosell" component={Tosell} />
+        <Route path="/addAnnouncement" component={AddAnnouncement} />
       </Route>
     </Router>
   );

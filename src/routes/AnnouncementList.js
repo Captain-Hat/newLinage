@@ -1,8 +1,10 @@
 
 import styles from './AnnouncementList.css';
 import React, { Component } from 'react'
-import { Input, Table, Pagination, message } from 'antd';
+import { Input, Table, Pagination, message, Button } from 'antd';
 import axios from "axios"
+import { Link } from 'dva/router';
+
 class AnnouncementList extends Component {
   constructor(props) {
     super(props);
@@ -79,6 +81,7 @@ class AnnouncementList extends Component {
           }}
 
         />
+        <Button type="primary"><Link to="/addAnnouncement">写公告</Link></Button>
       </div>
     );
   }

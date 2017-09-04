@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
+import { Link } from 'dva/router';
 
 import styles from './Table.less';
 
 const ProductList = ({ items, className }) => {
   const columns = [{
     key: 'item',
-    render: (text, record) => <a href="#">{record.item}</a>,
+    render: (text, record) => <Link to="/Article"><a href="#">{record.item}</a></Link>,
   },
   {
     dataIndex: 'date',

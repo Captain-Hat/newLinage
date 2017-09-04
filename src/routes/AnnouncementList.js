@@ -55,7 +55,7 @@ class AnnouncementList extends Component {
   render() {
     const columns = [{
       key: 'item',
-      render: (text, record) => <a href="#">{record.item}</a>,
+      render: (text, record) => <Link to="/Article"><a href="#">{record.item}</a></Link>,
     },
     {
       className: styles.alignCenter,

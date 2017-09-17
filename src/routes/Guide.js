@@ -3,6 +3,8 @@ import styles from './Guide.css';
 import React, { Component } from 'react'
 import { Input, Table, Pagination, message, Button } from 'antd';
 import axios from "axios"
+import qs from 'qs';
+
 import { Link } from 'dva/router';
 
 class Guide extends Component {
@@ -29,10 +31,15 @@ class Guide extends Component {
       pageNumber: this.page.pageNumber,
       pageSize: this.page.pageSize
     }, param)
-    axios.post('/api/users', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
-    })
+    axios.post('/api/showAnnouncement', qs.stringify({
+      current: 1,
+      pageSize: 10,
+      type: 2
+    }), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
       .then((res) => {
         let data = res.data
         this.page.total = data.option.total;

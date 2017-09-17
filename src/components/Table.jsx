@@ -8,10 +8,12 @@ import styles from './Table.less';
 
 const ProductList = ({ items, className }) => {
   const columns = [{
+
     key: 'item',
-    render: (text, record) => <Link to="/Article"><a href="#">{record.item}</a></Link>,
+    render: (text, record) => <Link to="/Article"><a className={styles.itemCol} href="#">{record.item}</a></Link>,
   },
   {
+    className: styles.dateCol,
     dataIndex: 'date',
     key: 'date'
   }];

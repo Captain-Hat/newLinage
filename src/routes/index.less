@@ -8,23 +8,142 @@
   width: 1000px;
 }
 
-.float_1 {
+.left {
   width: 380px;
-  height: 400px;
-  padding: 10px 24px;
   margin-right: 3px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.announceList {
+  width: 380px;
+  padding: 10px 24px;
+  margin-bottom: 3px;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.float_2 {
-  height: 400px;
+.annouceBottom {
+  width: 380px;
+  height: 150px;
+
+}
+
+.album {
+  background-color: rgba(255, 255, 255, 0.1);
+  float: left;
+  width: 200px;
+  height: 150px;
+
+  img {
+    width: 200px;
+    height: 150px;
+  }
+}
+
+.gamerCounts {
+  background-color: rgba(255, 255, 255, 0.1);
+  float: right;
+  width: 177px;
+  height: 150px;
+
+  ul {
+    color: #fff;
+    padding: 10px;
+
+    li {
+      line-height: 24px;
+    }
+  }
+}
+
+.center {
+  width: 425px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 3px;
+}
+
+.video {
+  width: 100%;
+  height: 240px;
+  margin-bottom: 3px;
+
+  video {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.market {
+  height: 160px;
+  width: 100%;
+  display: flex;
+}
+
+.innerItem {
+  height: 158px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  ul {
+    color: #fff;
+
+    li {
+      line-height: 24px;
+    }
+  }
+}
+
+.btn {
+  width: 100%;
+  background: #230800;
+  height: 51px;
+  line-height: 51px;
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.service {
+  width: 100%;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  ul {
+    color: #FFF;
+    padding: 10px;
+
+    li {
+      line-height: 26px;
+    }
+  }
+
+  .worTime {
+    float: left;
+  }
+
+  .qqLeague {
+    float: right;
+  }
+}
+
+.right {
   flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rightTop {
+  width: 100%;
+  height: 240px;
+  padding: 10px 0;
+  margin-bottom: 3px;
+  color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.float_4 {
+.rightBottom {
+  width: 100%;
+  height: 310px;
   flex: 1;
-  height: 417px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 20px 0;
   color: #fff;
@@ -34,33 +153,15 @@
   }
 }
 
-.float_3 {
-  width: 800px;
-  height: 417px;
-  background-color: transparent;
-  margin-right: 3px;
-  display: flex;
-  flex-wrap: wrap;
+.topCourse {
+  width: 1000px;
+  height: 245px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 3px;
 }
 
-.float_5 {
-  height: 240px;
-  width: 620px;
-  margin-right: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.float_6 {
-  height: 240px;
-  width: 177px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.float_7 {
-  width: 800px;
-  height: 174px;
-  margin-top: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
+.courseImg {
+  height: 245px;
 }
 
 .title {
@@ -85,13 +186,23 @@
   }
 }
 
+.siege {
+  margin-top: 10px;
+
+  li {
+    padding-left: 20px;
+    line-height: 23px;
+
+    &:hover {
+      background-color: #446379;
+    }
+  }
+}
+
 :global {
   .ant-carousel .slick-slide {
     text-align: center;
     overflow: hidden;
   }
 
-  .ant-carousel .slick-slide img {
-    height: 400px;
-  }
 }

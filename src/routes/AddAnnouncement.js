@@ -7,33 +7,20 @@ import styles from './AddAnnouncement.less';
 import findIndex from "lodash/findIndex";
 import uniqBy from "lodash/uniqBy";
 import LzEditor from 'react-lz-editor'
-import { Select, Button } from 'antd';
-const Option = Select.Option
+import { Select, Button, message } from 'antd';
+import { hashHistory } from 'react-router'
 
+const Option = Select.Option
+import axios from "axios";
+import qs from 'qs';
 class AddAnnouncement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      htmlContent: `<h1> Head level 1</h1>
-                <p style='text-align:center;'><span style="color:#ED5565">red text</span>,center ,<strong>bold</strong>，<em>italic</em></p>
-                <blockquote style='text-align:left;'><span style="color:#967adc">C</span> <span style="color:#a0d468">O</span><span style="color:#48cfad">L</span><span style="color:#4a89dc">O</span><span style="color:#967adc">R</span><span style="color:#434a54">S</span></blockquote>
-                <p><br></p>
-                <ul>
-                  <li><span style="color:#434a54">list 1</span></li>
-                  <li><span style="color:#434a54">list 2</span></li>
-                  <li><span style="color:#434a54">list 3</span></li>
-                </ul>
-                <pre><code>Block here.Block here.Block here.Block here.</code></pre>
-                <pre><code>Block here.Block here.Block here.Block here.Block here.</code></pre>
-                <pre><code>Block here.Block here.Block here.Block here.Block here.</code></pre>
-                <p><img src="https://image.qiluyidian.mobi/43053508139910678747.jpg"/></p>
-                <p><br></p>
-                <h2>Yankees, Peeking at the Red Sox, Will Soon Get an Eyeful</h2>
-                <p>Leaning over the railing from his perch on the top step of the first-base dugout this past weekend in Cleveland, Yankees Manager Joe Girardi did not have to divert his gaze to catch glimpses of the out-of-town scoreboard./p>
-                <p>It was all there on the left-field wall.</p>
-                <p>“You’re going to look — it’s impossible not to,” Girardi said. “I haven’t seen a ballpark where they put it behind you. You pay attention, of course.”</p>
-                <p>Whenever Girardi stole a glance, there was rarely any good news for the Yankees. While Girardi’s charges were clawing their way to a split of their four-game series against the formidable Indians, the Boston Red Sox were plowing past the rebuilding Chicago White Sox, sweeping four games at Fenway Park.</p>`,
-      responseList: []
+      htmlContent: ``,
+      responseList: [],
+      type: 1,
+      inputHtml: ""
     }
     this.receiveHtml = this.receiveHtml.bind(this);
     this.receiveMarkdown = this.receiveMarkdown.bind(this);
@@ -45,6 +32,7 @@ class AddAnnouncement extends Component {
   }
   receiveHtml(content) {
     console.log("recieved HTML content", content);
+    this.setState({ inputHtml: content })
   }
   componentDidMount() { }
   receiveMarkdown(content) {
@@ -113,7 +101,29 @@ class AddAnnouncement extends Component {
     }));
     return policy;
   }
-  handleChange() {
+  handleChange(e) {
+    this.setState({ type: e })
+  }
+  publish() {
+    // hashHistory.push('/')
+    axios.post('/api/announceArticle', qs.stringify({
+      content: this.state.inputHtml,
+      type: this.state.type
+    }), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
+      .then((res) => {
+        let data = res.data
+        if (data.errcode == 200) {
+          // 发布成功跳到列表
+
+        }
+      })
+      .catch((err) => {
+        message.warning("请求错误");
+      });
 
   }
   render() {
@@ -159,7 +169,7 @@ class AddAnnouncement extends Component {
       <div className={styles.normal}>
         <div className={styles.top}>
           <label htmlFor="">公告分类：</label>
-          <Select defaultValue="1" style={{ width: 120 }} onChange={this.handleChange}>
+          <Select defaultValue="1" style={{ width: 120 }} onChange={this.handleChange.bind(this)}>
             <Option value="1">bug修复</Option>
             <Option value="2">节日活动</Option>
             <Option value="3">更新预告</Option>
@@ -170,7 +180,7 @@ class AddAnnouncement extends Component {
           importContent={this.state.htmlContent}
           cbReceiver={this.receiveHtml}
           uploadProps={uploadProps} />
-        <Button type="primary" style={{ marginTop: "20px" }}>确认发布</Button>
+        <Button type="primary" style={{ marginTop: "20px" }} onClick={this.publish.bind(this)}>确认发布</Button>
       </div>
     );
   }

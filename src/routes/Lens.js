@@ -3,6 +3,8 @@ import styles from './Lens.css';
 import React, { Component } from 'react'
 import { Input, Table, Pagination, message, Menu } from 'antd';
 import axios from "axios";
+import qs from 'qs';
+
 import { routerRedux, Link } from 'dva/router';
 
 const menuItems = [
@@ -38,10 +40,13 @@ class LensList extends Component {
       pageNumber: this.page.pageNumber,
       pageSize: this.page.pageSize
     }, param)
-    axios.post('/api/users', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
+    axios.post('/api/equipList', qs.stringify({
+      type: "武器",
+      species: "匕首",
+      current: 1,
+      pageSize: 10,
     })
+    )
       .then((res) => {
         let data = res.data
         this.page.total = data.option.total;

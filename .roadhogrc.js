@@ -28,5 +28,12 @@ export default {
         'dva-hmr'
       ]
     }
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost/newlineage/api/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api": "" }
+    }
   }
 };

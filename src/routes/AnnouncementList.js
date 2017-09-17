@@ -2,8 +2,9 @@
 import styles from './AnnouncementList.css';
 import React, { Component } from 'react'
 import { Input, Table, Pagination, message, Button } from 'antd';
-import axios from "axios"
 import { Link } from 'dva/router';
+import axios from "axios";
+import qs from 'qs';
 
 class AnnouncementList extends Component {
   constructor(props) {
@@ -29,10 +30,15 @@ class AnnouncementList extends Component {
       pageNumber: this.page.pageNumber,
       pageSize: this.page.pageSize
     }, param)
-    axios.post('/api/users', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
-    })
+    axios.post('/api/showAnnouncement', qs.stringify({
+      current: 1,
+      pageSize: 10,
+      type: 1
+    }), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
       .then((res) => {
         let data = res.data
         this.page.total = data.option.total;

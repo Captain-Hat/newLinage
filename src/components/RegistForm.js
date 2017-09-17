@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import styles from './RegistForm.less';
-import { Form, Input, Tooltip, Row, Col, Checkbox, Button, Icon, Modal } from 'antd';
+import { Form, Input, Tooltip, Row, Col, Checkbox, Button, Icon, Modal, message } from 'antd';
 const FormItem = Form.Item;
 const confirm = Modal.confirm;
+import axios from "axios";
+import qs from 'qs';
 class RegistForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
-      agreement: false
+      agreement: false,
+      verfyCode: ''
     };
   }
 
@@ -29,7 +32,7 @@ class RegistForm extends Component {
   }
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
+    if (value && value !== form.getFieldValue('passWord')) {
       callback('两次输入的密码不一致!');
     } else {
       callback();
@@ -60,6 +63,25 @@ class RegistForm extends Component {
     this.setState({
       visible: false,
     });
+  }
+  getCode = () => {
+    axios.get('/api/getVerificationCode', {
+      params: {
+        type: 2
+      }
+    }).then((res) => {
+      let data = res.data
+      if (data.errcode == 200) {
+        // 发布成功跳到列表
+        message.warning("验证码获取成功");
+        this.setState({
+          verfyCode: data.data
+        })
+      }
+    })
+      .catch((err) => {
+        message.warning("请求错误");
+      });
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -94,7 +116,7 @@ class RegistForm extends Component {
             label="帐号"
             hasFeedback
           >
-            {getFieldDecorator('username', {
+            {getFieldDecorator('userName', {
               rules: [{
                 required: true, message: '请输入帐号',
               }],
@@ -107,7 +129,7 @@ class RegistForm extends Component {
             label="密码"
             hasFeedback
           >
-            {getFieldDecorator('password', {
+            {getFieldDecorator('passWord', {
               rules: [{
                 required: true, message: '请输入密码',
               }, {
@@ -137,7 +159,7 @@ class RegistForm extends Component {
             label="昵称"
             hasFeedback
           >
-            {getFieldDecorator('nickname', {
+            {getFieldDecorator('nickName', {
               rules: [{ required: true, message: '请输入昵称', whitespace: true }],
             })(
               <Input />
@@ -150,14 +172,15 @@ class RegistForm extends Component {
           >
             <Row gutter={8}>
               <Col span={12}>
-                {getFieldDecorator('captcha', {
+                {getFieldDecorator('vertifyCode', {
                   rules: [{ required: true, message: '请点击生成验证码' }],
+                  initValue: this.state.verfyCode
                 })(
                   <Input size="large" />
                   )}
               </Col>
               <Col span={12}>
-                <Button size="large">生成验证</Button>
+                <Button size="large" onClick={this.getCode.bind(this)}>生成验证</Button>
               </Col>
             </Row>
           </FormItem>

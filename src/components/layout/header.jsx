@@ -17,9 +17,6 @@ function Header({ dispatch, location }) {
   }
   return (
     <header className={styles.normal}>
-      <div className={styles.logo}>
-        <Link to="/"><img src={logo} style={{ height: "64px" }} alt="" /></Link>
-      </div>
       <Menu
         className={styles.menu}
         theme="dark"
@@ -27,8 +24,13 @@ function Header({ dispatch, location }) {
         selectedKeys={[location.pathname]}
         onClick={changeSelect}
       >
+        <Menu.Item key="/logo">
+          <div className={styles.logo}>
+            <Link to="/"><img src={logo} style={{ height: "64px" }} alt="" /></Link>
+          </div>
+        </Menu.Item>
         <Menu.Item key="/home">
-          <Link to="/">首页</Link>
+          <Link to="/"><span>首页</span></Link>
         </Menu.Item>
         <Menu.Item key="/registration">
           <Link to="/registration">账号注册</Link>
@@ -45,15 +47,15 @@ function Header({ dispatch, location }) {
         <Menu.Item key="/market">
           <Link to="/market">拍卖行</Link>
         </Menu.Item>
-        <Menu.Item key="/downloadPage">
+        {/* <Menu.Item key="/downloadPage">
           <Link to="/downloadPage">下载中心</Link>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="/friendHelp">
           <Link to="/friendHelp">友情赞助</Link>
         </Menu.Item>
-        <Menu.Item key="/album">
+        {/* <Menu.Item key="/album">
           <Link to="/album">精彩截图</Link>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="/login" style={{ paddingRight: "0", paddingLeft: "60px" }}>
           <Link to="/login">登录</Link>
         </Menu.Item>

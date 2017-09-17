@@ -1,10 +1,12 @@
 .normal {
-  max-height: 64px;
+  max-height: 80px;
   overflow: hidden;
   // position: fixed;
   // width: 100%;
   width: 1000px;
   margin: 0 auto;
+  text-align: center;
+  font-size: 14px;
 }
 
 .logo {
@@ -20,6 +22,12 @@
 }
 
 .menu {
-  line-height: 64px;
+  line-height: 80px;
   background-color: transparent;
+}
+:global{
+  .ant-layout-header{
+    height: 80px;
+    line-height: 80px;
+  }
 }

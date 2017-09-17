@@ -10,7 +10,7 @@ export default {
   effects: {
     *sumit({ payload: values }, { call, put }) {
       const { data, headers } = yield call(usersService.sumit, values);
-      if (data.errcode == 1) {
+      if (data.errcode == 200) {
         message.success('注册成功')
       }
       // Inside Effects

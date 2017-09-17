@@ -15,8 +15,7 @@ import img_5 from '../assets/course2.png'
 import img_6 from '../assets/course.png'
 
 import img_7 from '../assets/album.png'
-
-import vedio from '../assets/vedio.mp4'
+ 
 import hammer from '../assets/hammer.png'
 
 const Index = ({ dispatch, items, className }) => {

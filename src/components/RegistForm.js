@@ -70,12 +70,12 @@ class RegistForm extends Component {
         type: 2
       }
     }).then((res) => {
-      let data = res.data
-      if (data.errcode == 200) {
+
+      if (res.status == 200) {
         // 发布成功跳到列表
-        message.warning("验证码获取成功");
+        message.success("验证码获取成功");
         this.setState({
-          verfyCode: data.data
+          verfyCode: res.data
         })
       }
     })
@@ -174,7 +174,7 @@ class RegistForm extends Component {
               <Col span={12}>
                 {getFieldDecorator('vertifyCode', {
                   rules: [{ required: true, message: '请点击生成验证码' }],
-                  initValue: this.state.verfyCode
+                  initialValue: this.state.verfyCode
                 })(
                   <Input size="large" />
                   )}

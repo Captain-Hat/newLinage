@@ -21,40 +21,37 @@ class LensList extends Component {
       agreement: false,
       tableDataSource: [],
       selectedKeys: "武器",
-      subselectedKeys: "",
+      subselectedKeys: "单手剑",
       subMenu: []
     };
     this.page = {
-      pageNumber: 1,
+      current: 1,
       pageSize: 10,
       total: 100
     }
   }
-  loadData(param) {
+  loadData(param = {}) {
     this.setState({
       tableDataSource: [],
       tableLoading: true,
     })
-    param = param || {};
     const newParam = Object.assign({
-      pageNumber: this.page.pageNumber,
-      pageSize: this.page.pageSize
+      current: this.page.current,
+      pageSize: this.page.pageSize,
+      // type: this.state.selectedKeys,
+      type: "weapon",
+      // species: this.state.subselectedKeys
+      species: "dagger"
     }, param)
-    axios.post('/api/equipList', qs.stringify({
-      type: "武器",
-      species: "匕首",
-      current: 1,
-      pageSize: 10,
-    })
-    )
-      .then((res) => {
-        let data = res.data
-        this.page.total = data.option.total;
-        this.setState({
-          tableLoading: false,
-          tableDataSource: data.data
-        })
+    axios.post('/api/equipList', qs.stringify(newParam)
+    ).then((res) => {
+      let data = res.data
+      this.page.total = data.option.total;
+      this.setState({
+        tableLoading: false,
+        tableDataSource: data.data
       })
+    })
       .catch((err) => {
         this.setState({
           tableLoading: false,
@@ -151,12 +148,12 @@ class LensList extends Component {
           rowKey={record => record.id}
           showHeader={false}
           bordered={true}
-          pagination={{ pageSize: this.page.pageSize, current: this.page.pageNumber, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
+          pagination={{ pageSize: this.page.pageSize, current: this.page.current, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
           onChange={(pagination, filters, sorter) => {
-            const newParam = { pageNumber: pagination.current, pageSize: pagination.pageSize }
+            const newParam = { current: pagination.current, pageSize: pagination.pageSize }
             this.loadData(newParam);
             this.page.pageSize = pagination.pageSize
-            this.page.pageNumber = pagination.current
+            this.page.current = pagination.current
           }}
 
         />

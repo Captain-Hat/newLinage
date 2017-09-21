@@ -6,7 +6,7 @@ species：
 
 武器(weapon)  species:
 匕首：dagger
-单手剑：sword
+单手剑：sword            
 双手剑：tohandsword
 双刀：edoryu
 矛：spear
@@ -26,22 +26,22 @@ species：
 
 防具(armor) species:
 斗篷：cloak
-T恤：T
-盔甲：armor
-手套：glove
-靴子：boots
-盾牌：shield
-项链：amulet
-指环：ring
-腰带：belt
-帽子：helm
-耳环：earring
-臂甲：guarder
+T恤T
+盔甲armor
+手套glove
+靴子boots
+盾牌shield
+项链amulet
+指环ring
+腰带belt
+帽子helm
+耳环earring
+臂甲guarder
 
 套装(armor_set)  species:
 
 道具(etcitem)  species:
-照明：light
+照明light
 其他：other
 魔术棒：wand
 药水：potion

@@ -1,6 +1,6 @@
 .normal {
   width: 1000px;
-  height: 820px;
+  min-height: 820px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 30px;
 }
@@ -20,6 +20,7 @@
 
 .leftCol {
   width: 40px;
+  background:#000;
 }
 
 .rightCol {

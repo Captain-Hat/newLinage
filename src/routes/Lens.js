@@ -39,9 +39,9 @@ class LensList extends Component {
       current: this.page.current,
       pageSize: this.page.pageSize,
       // type: this.state.selectedKeys,
-      type: "weapon",
+      type: "armor",
       // species: this.state.subselectedKeys
-      species: "dagger"
+      species: "cloak"
     }, param)
     axios.post('/api/equipList', qs.stringify(newParam)
     ).then((res) => {
@@ -101,12 +101,12 @@ class LensList extends Component {
     const columns = [{
       className: styles.leftCol,
       key: 'item',
-      render: (text, record) => <img src={record.img} alt="" />,
+      render: (text, record) => <img src={'inv_gfx/' + record.invgfx + '.png'} alt="" />,
     },
     {
       className: styles.rightCol,
-      key: 'desc',
-      render: (text, record) => <Link to="/equipDetail?id=1">{record.desc}</Link>
+      key: 'name',
+      render: (text, record) => <Link to="/equipDetail?id=1">{record.name}</Link>
     }];
 
 

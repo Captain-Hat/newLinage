@@ -1,0 +1,60 @@
+type:
+道具(etcitem)  武器(weapon) 防具(armor) NPC('' 查npc) 套装(armor_set)  魔法娃娃图鉴(magic_doll  查magic_doll) 宝箱图鉴(treasure_box) 任务(task)  
+
+
+species：
+
+武器(weapon)  species:
+匕首：dagger
+单手剑：sword
+双手剑：tohandsword
+双刀：edoryu
+矛：spear
+单手矛：singlespear
+魔杖：staff
+钝器：blunt
+双手魔杖：tohandstaff
+双手钝器：tohandblunt
+钢爪：claw
+弓：bow
+单手弓：singlebow
+单手剑：arrow （查etcitem）
+飞刀：sting  （查etcitem）
+铁手甲：gauntlet
+奇古兽：kiringku
+锁链剑：chainsword
+
+防具(armor) species:
+斗篷：cloak
+T恤：T
+盔甲：armor
+手套：glove
+靴子：boots
+盾牌：shield
+项链：amulet
+指环：ring
+腰带：belt
+帽子：helm
+耳环：earring
+臂甲：guarder
+
+套装(armor_set)  species:
+
+道具(etcitem)  species:
+照明：light
+其他：other
+魔术棒：wand
+药水：potion
+包裹：treasure_box
+宝石：gem
+食物：food
+卷轴：scroll
+图腾：totem
+烟火：firecracker
+材料：material
+任务道具：questitem
+活动道具：event
+宠物装备：petitem
+技能书（spellbook  查etcitem）
+魔法娃娃(magic_doll  查etcitem) 
+宝箱(treasure_box)

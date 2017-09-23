@@ -26,7 +26,7 @@ function Header({ dispatch, location }) {
       >
         <Menu.Item key="/logo">
           <div className={styles.logo}>
-            <Link to="/"><img src={logo} style={{ height: "64px" }} alt="" /></Link>
+            <Link to="/"><img src={logo} alt="" /></Link>
           </div>
         </Menu.Item>
         <Menu.Item key="/home">

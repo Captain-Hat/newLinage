@@ -1,0 +1,101 @@
+.normal {
+  width: 1000px;
+  min-height: 820px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+}
+
+.menu {
+  line-height: 40px;
+  background-color: transparent;
+  font-size: 14px;
+  border: 1px solid #000;
+  border-bottom-color: #000!important;
+}
+
+.submenu {
+  line-height: 40px;
+  background-color: transparent;
+  font-size: 12px;
+  border: 1px solid #000;
+  border-bottom: none;
+  border-top: none;
+}
+
+.leftCol {
+  width: 40px;
+  background: #000;
+}
+
+.rightCol {
+  color: #fff;
+  width: 150px;
+}
+
+.mainProp {
+  width: 145px;
+}
+
+.detailItem {
+  display: block;
+  line-height: 20px;
+}
+
+.colContainer {
+  display: flex;
+}
+
+.detailCol {
+  display: inline-block;
+  width: 50%;
+  padding: 0 10px;
+  min-height: 80px;
+}
+
+.npcdetailCol {
+  padding: 0 10px;
+  display: inline-block;
+  width: 120px;
+  margin-right: 20px;
+  min-height: 100px;
+}
+.npcExCol{
+  width: 150px;
+}
+.detailCol:not(:last-child) {
+  margin-right: 50px;
+}
+.npcImg{
+  width: 118px;;
+}
+.tdBox {
+  padding: 0 10px;
+  min-height: 80px;
+}
+
+.setImgs {
+  width: 160px;
+}
+
+.setImgsBox {
+  width: 160px;
+  position: relative;
+}
+
+.setImg:not(:last-child) {
+  margin-right: 10px;
+}
+
+:global {
+  .ant-table-bordered .ant-table-tbody > tr > td {
+    border-right: 1px solid #000;
+  }
+
+  .ant-table-tbody > tr > td {
+    border-bottom: 1px solid #000;
+  }
+
+  .ant-table-bordered .ant-table-body > table {
+    border: 1px solid #000;
+  }
+}

@@ -1,61 +1,60 @@
-武器：
-add_cha  ：增加魅力值   
-add_con  ：增加体质
-add_dex ： 增加敏捷
-add_hp ： 增加体力值
-add_hpr ：增加体力回复
-add_int：增加智力
-add_mp：增加魔力值
-add_mpr：增加魔力回复
-add_sp：增加魔攻
-add_str：增加力量
-add_wis：增加精神
-bless：1祝福/0不祝福
-canbedmg：是否可以损坏（不可损坏再显示）
-cant_delete：是否可以被删除
-dmg_large：最大攻击值   (min/max)
-dmg_small：最小攻击
+武器:
+add_cha :增加魅力值   
+add_con  :增加体质
+add_dex : 增加敏捷
+add_hp : 增加体力值
+add_hpr :增加体力回复
+add_int:增加智力
+add_mp:增加魔力值
+add_mpr:增加魔力回复
+add_sp:增加魔攻
+add_str:增加力量
+add_wis:增加精神
+bless:1祝福/0不祝福
+canbedmg:是否可以损坏（不可损坏再显示）
+cant_delete:是否可以被删除
+dmg_large:最大攻击值   (min/max)
+dmg_small:最小攻击
 dmgmodifier:额外攻击
-double_dmg_chance：暴击率
-haste_item：永久加速效果
-hitmodifier：命中率
-invgfx：图片path
-magicdmgmodifier：魔法暴击
-materialon：材质
-max_lvl：最大等级
-min_lvl：最小等级
-name 
-safenchant ：安定值
-trade ：是否可交易 
-use_darkelf：黑暗精灵
-use_dragonknight：龙骑
-use_elf：精灵
-use_illusionist：幻术师
-use_knight：骑士
-use_mage：法师
+double_dmg_chance:暴击率
+haste_item:永久加速效果
+hitmodifier:命中率
+invgfx:图片path
+magicdmgmodifier:魔法暴击
+materialon:材质
+max_lvl:最大等级
+min_lvl:最小等级 
+safenchant :安定值
+trade :是否可交易 
+use_darkelf:黑暗精灵
+use_dragonknight:龙骑
+use_elf:精灵
+use_illusionist:幻术师
+use_knight:骑士
+use_mage:法师
 use_royalL:王族
-weight：重量
+weight:重量
 
 
 武器(weapon)  species:
-匕首：dagger
-单手剑：sword
-双手剑：tohandsword
-双刀：edoryu
-矛：spear
-单手矛：singlespear
-魔杖：staff
-钝器：blunt
-双手魔杖：tohandstaff
-双手钝器：tohandblunt
-钢爪：claw
-弓：bow
-单手弓：singlebow
-单手剑：arrow （查etcitem）
-飞刀：sting  （查etcitem）
-铁手甲：gauntlet
-奇古兽：kiringku
-锁链剑：chainsword
+匕首:dagger
+单手剑:sword
+双手剑:tohandsword
+双刀:edoryu
+矛:spear
+单手矛:singlespear
+魔杖:staff
+钝器:blunt
+双手魔杖:tohandstaff
+双手钝器:tohandblunt
+钢爪:claw
+弓:bow
+单手弓:singlebow
+单手剑:arrow （查etcitem）
+飞刀:sting  （查etcitem）
+铁手甲:gauntlet
+奇古兽:kiringku
+锁链剑:chainsword
 
 
 

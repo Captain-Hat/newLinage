@@ -1,0 +1,136 @@
+armor
+材质:material
+重量:weight/1000
+防御:ac   //*******
+安定:safenchant     (如果大于等于0，显示安定:x,如果安定为-1，显示不可强化)
+
+王族:use_royal
+骑士:use_knight
+法师:use_mage
+精灵:use_elf
+黑暗精灵:use_darkelf
+龙骑士:use_dragonknight
+幻术师:use_illusionist
+
+力量:add_str
+体质:add_con
+敏捷:add_dex
+智力:add_int
+精神:add_wis
+魅力:add_cha
+
+血量:add_hp
+蓝量:add_mp
+血量恢复:add_hpr
+蓝量恢复:add_mpr
+魔攻:add_sp
+
+最小等级:min_lvl
+最大等级:max_lvl
+
+魔法防御:m_def
+永久加速:haste_item
+伤害减免:damage_reducton
+增加负重百分之:weight_reduction
+
+攻击成功:hit_modifier
+额外攻击点数:dmg_modifier
+弓的命中率:bow_hit_modifier
+弓打击值:bow_dmg_modifier
+
+是否祝福:bless   (0为祝福，在道具名称前加"祝福的"，1为常规的不用改变)
+是否可交易:trade （0为可交易不用管，1为不可交易）
+是否可删除:cant_delete (0为删除，不显示，1为不可删除)
+使用时限:max_use_time/3600 （显示小时）
+
+水属性防御:defense_water
+风属性防御:defense_wind
+土属性防御:defense_earth
+火属性防御:defense_fire
+
+昏迷耐性:regist_stun
+石化耐性:regist_stone
+睡眠耐性:regist_sleep
+
+寒冰耐性:regist_freeze
+支撑耐性:regist_sustain
+致盲耐性:regist_blind
+强度:grade(3为特 2为低 1为中 0为高 -1不显示)
+------------------------------------------------------------------------------
+armor_set
+防御:ac
+变身:polyid (这个ID的名字从另外一个表获取)
+血量:add_hp
+蓝量:add_mp
+血量恢复:hpr
+蓝量恢复:mpr
+魔法防御:mr
+
+力量:str
+体质:con
+敏捷:dex
+智力:intl
+精神:wis
+魅力:cha
+
+攻击成功:hit_modifier
+额外攻击点数:dmg_modifier
+弓的命中率:bow_hit_modifier
+弓打击值:bow_dmg_modifier
+
+魔攻:sp
+水属性防御:defense_water
+风属性防御:defense_wind
+土属性防御:defense_earth
+火属性防御:defense_fire
+------------------------------------------------------------------------------
+etcitem
+材质:material
+重量:weight/1000
+是否堆叠:stackable （1为可堆叠 0为不可堆叠）
+使用次数:max_charge_count
+
+对于小怪的攻击:dmg_small
+对于打怪的攻击:dmg_large
+
+最小等级:min_lvl
+最大等级:max_lvl
+
+是否祝福:bless   (0为祝福，在道具名称前加"祝福的"，1为常规的不用改变)
+是否可交易:trade （0为可交易不用管，1为不可交易）
+是否可删除:cant_delete (0为删除，不显示，1为不可删除)
+是否封印:can_seal (1为可封印,0为不可封印,不显示)
+使用间隔:delay_effect/3600 小时来显示
+增加饱食度:food_volume
+------------------------------------------------------------------------------
+castle
+血盟信息栏
+characters
+在线玩家
+点击NPC或者点击道具 查询的  droplist
+------------------------------------------------------------------------------
+NPC下面加 怪物栏
+怪物:L1Monster
+
+等级:lvl
+血量:hp
+蓝量:mp
+防御:ac
+力量:str
+体质:con
+敏捷:dex
+精神:wis
+智力:intel
+魔防:mr
+正义值:lawful
+大小怪:size
+主动攻击/被动攻击:agro  1为是
+是否看穿变身:agrososc  1为是
+是否看穿隐身:agrocoi  1为是
+是否可迷魅:tamble  1为是
+---------------------------------------------------
+出没地方 查询 spawnlist 和 spawnlist_boss
+掉落物品查询 droplist
+
+
+

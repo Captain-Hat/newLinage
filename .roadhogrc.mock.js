@@ -90,6 +90,75 @@ let list = [
         price: "1555"
     },
 ]
+let npcData = [
+    {
+        "gfxid": "34",
+        "name": "鳄鱼",
+        "agro": "1",//主动
+        "ac": "5",
+        "size": "large",
+        "exp": "6",
+        "lawful": "iron",
+        "lvl": "10",
+        "mr": "1",//抗魔
+        "hp": "1",
+        "mp": "1",
+        "str": "1",
+        "dex": "1",
+        "con": "0",
+        "intel": "0",
+        "wis": "2",
+        "agrocoi": "1",//看穿隐身
+        "agrososc": "1",//看穿变身
+        "tamble": "1"
+    },
+    {
+        "gfxid": "34",
+        "name": "王八",
+        "agro": "0",//主动
+        "ac": "5",
+        "size": "large",
+        "exp": "6",
+        "lawful": "iron",
+        "lvl": "10",
+        "mr": "1",//抗魔
+        "hp": "1",
+        "mp": "1",
+        "str": "1",
+        "dex": "1",
+        "con": "0",
+        "intel": "0",
+        "wis": "2",
+        "agrocoi": "0",//看穿隐身
+        "agrososc": "0",//看穿变身
+        "tamble": "1"
+    }
+    ,
+    {
+        "gfxid": "34",
+        "name": "兔子",
+        "agro": "0",//主动
+        "lvl": "10",
+        "size": "large",
+        "exp": "6",
+        "lawful": "2",
+
+        "ac": "5",
+        "mr": "1",//抗魔
+        "hp": "1",
+        "mp": "1",
+        "str": "1",
+        "dex": "1",
+        "con": "0",
+        "intel": "0",
+        "wis": "2",
+
+
+        "agrocoi": "0",//看穿隐身
+        "agrososc": "0",//看穿变身
+        "tamble": "1"
+    }
+]
 let list2 = [
     {
         ac: '3',
@@ -124,6 +193,7 @@ export default {
     'post /api/sumit': { errcode: 1, msg: "success" },
     'post /api/users': { errcode: 1, data: list, option: { total: 100 }, msg: "success" },
     'post /api/detail': { errcode: 1, data: list2, option: { total: 100 }, msg: "success" },
+    'post /api/npc': { errcode: 1, data: npcData, option: { total: 100 }, msg: "success" },
 
     // GET POST 可省略
     '/api/users/1': { id: 1 },
@@ -132,7 +202,7 @@ export default {
     'POST /api/users/create': (req, res) => { res.end('OK'); },
 
     // Forward 到另一个服务器
-    'GET /assets/*': 'http://localhost/newlineage/api/',  
+    'GET /assets/*': 'http://localhost/newlineage/api/',
 
     // Forward 到另一个服务器，并指定子路径
     // 请求 /someDir/0.0.50/index.css 会被代理到 https://g.alicdn.com/tb-page/taobao-home, 实际返回 https://g.alicdn.com/tb-page/taobao-home/0.0.50/index.css

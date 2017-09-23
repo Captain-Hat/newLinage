@@ -137,6 +137,7 @@ class EquipDetail extends Component {
 
   componentDidMount() {
     this.loadData()
+    console.log(this.props)
   }
 
   render() {

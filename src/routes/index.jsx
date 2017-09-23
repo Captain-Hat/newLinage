@@ -15,7 +15,7 @@ import img_5 from '../assets/course2.png'
 import img_6 from '../assets/course.png'
 
 import img_7 from '../assets/album.png'
- 
+
 import hammer from '../assets/hammer.png'
 
 const Index = ({ dispatch, items, className }) => {
@@ -36,15 +36,15 @@ const Index = ({ dispatch, items, className }) => {
                 <div className={styles.left}>
                     <div className={styles.announceList}>
                         <div style={{ background: 'transparent', marginBottom: "20px" }}>
-                            <Button style={{ border: "none", marginRight: "9px", fontSize: "13px" }} type="default" size="small" ghost>综合公告</Button>
-                            <Button style={{ border: "none", marginRight: "9px", fontSize: "13px" }} type="default" size="small" ghost>更新</Button>
-                            <Button style={{ border: "none", marginRight: "9px", fontSize: "13px" }} type="default" size="small" ghost>活动</Button>
-                            <Button style={{ border: "none", marginRight: "9px", fontSize: "13px" }} type="default" size="small" ghost>免责申明</Button>
-                            <Button style={{ border: "none", marginRight: "9px", fontSize: "13px" }} type="default" size="small" ghost>关于我们</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>综合公告</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>更新</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>活动</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>免责申明</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>关于我们</Button>
                         </div>
                         <Mytable className={className} items={items} />
-                        <div style={{ textAlign: "right" }}>
-                            <Link style={{ fontSize: "13px" }} to="/announcementList">more</Link>
+                        <div style={{ textAlign: "right",marginTop:'10px',paddingRight:'16px' }}>
+                            <Link className={styles.myLink} style={{ fontSize: "13px" }} to="/announcementList">more</Link>
                         </div>
                     </div>
                     <div className={styles.annouceBottom}>
@@ -138,7 +138,7 @@ const Index = ({ dispatch, items, className }) => {
                             <li><a href="">长期稳定</a></li>
                         </ul>
                         <div style={{ textAlign: "right" }}>
-                            <Button style={{ border: "none", fontSize: "13px" }} type="default" size="small" ghost>more</Button>
+                            <Button style={{ border: "none", fontSize: "13px", color: '#b8c6cc' }} type="default" size="small" ghost>more</Button>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@ const Index = ({ dispatch, items, className }) => {
 };
 
 export default connect((state) => ({
-    items: state.index.items,
+    items: state.index.items.slice(0, 9),
     className: 'announcement'
 }))(Index);
 

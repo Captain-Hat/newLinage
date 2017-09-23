@@ -104,9 +104,9 @@ const Index = ({ dispatch, items, className }) => {
                             <ul>
                                 <li>&nbsp;</li>
                                 <li>qq群（2000）：539891495</li>
-                                <li style={{ color: '#0C421B' }}>点击加入qq群</li>
+                                <li style={{ color: 'red' }}>点击加入qq群</li>
                                 <li>官方YY频道：21267952</li>
-                                <li style={{ color: '#0C421B' }}>点击进入官方YY</li>
+                                <li style={{ color: 'red' }}>点击进入官方YY</li>
                             </ul>
                         </div>
                     </div>

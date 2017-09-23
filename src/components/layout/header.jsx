@@ -35,21 +35,21 @@ function Header({ dispatch, location }) {
         <Menu.Item key="/registration">
           <Link to="/registration">账号注册</Link>
         </Menu.Item>
-        <Menu.Item key="/forum">
+        {/* <Menu.Item key="/forum">
           <Link to="/forum">论坛</Link>
-        </Menu.Item>
-        <Menu.Item key="/guide">
-          <Link to="/guide">游戏指南</Link>
+        </Menu.Item> */}
+        <Menu.Item key="/announcementList">
+          <Link to="/announcementList">公告栏</Link>
         </Menu.Item>
         <Menu.Item key="/lens">
           <Link to="/lens">透视镜</Link>
         </Menu.Item>
-        <Menu.Item key="/market">
+        {/* <Menu.Item key="/market">
           <Link to="/market">拍卖行</Link>
-        </Menu.Item>
-        {/* <Menu.Item key="/downloadPage">
-          <Link to="/downloadPage">下载中心</Link>
         </Menu.Item> */}
+        <Menu.Item key="/downloadPage">
+          <Link to="/downloadPage">下载中心</Link>
+        </Menu.Item>
         <Menu.Item key="/friendHelp">
           <Link to="/friendHelp">友情赞助</Link>
         </Menu.Item>

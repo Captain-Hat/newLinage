@@ -18,7 +18,45 @@ import img_7 from '../assets/album.png'
 
 import hammer from '../assets/hammer.png'
 
-const Index = ({ dispatch, items, className }) => {
+const Index = ({ dispatch, items, gamerInfo, className }) => {
+    let total = 0;
+    let jobs = {
+        '王族': 0,
+        '骑士': 0,
+        '妖精': 0,
+        '法师': 0,
+        '黑妖': 0,
+        '龙骑': 0,
+        '幻术': 0
+    };
+    gamerInfo.map((v, k) => {
+        total = total + (+v.count);
+        switch (v.type) {
+            case '0':
+                jobs['王族'] = v.count
+                break;
+            case '1':
+                jobs['骑士'] = v.count
+                break;
+            case '2':
+                jobs['妖精'] = v.count
+                break;
+            case '3':
+                jobs['法师'] = v.count
+                break;
+            case '4':
+                jobs['黑妖'] = v.count
+                break;
+            case '5':
+                jobs['龙骑'] = v.count
+                break;
+            case '6':
+                jobs['幻术'] = v.count
+                break;
+            default:
+                break;
+        }
+    })
     return (
         <div className={styles.cardContainer}>
             <div className={styles.flexBox}>
@@ -52,18 +90,18 @@ const Index = ({ dispatch, items, className }) => {
                         </div>
                         <div className={styles.gamerCounts}>
                             <ul>
-                                <li>实时在线玩家：140</li>
-                                <li><span style={{ marginRight: '15px' }}>王族：12</span><span>黑暗精灵：25</span></li>
-                                <li><span style={{ marginRight: '15px' }}>骑士：12</span><span>龙骑士：25</span></li>
-                                <li><span style={{ marginRight: '15px' }}>法师：12</span><span>幻术师：25</span></li>
-                                <li><span style={{ marginRight: '15px' }}>精灵：12</span><span>网站：25</span></li>
+                                <li>实时在线玩家：{total}</li>
+                                <li><span style={{ marginRight: '15px' }}>王族：{jobs['王族']}</span><span>黑暗精灵：{jobs['黑妖']}</span></li>
+                                <li><span style={{ marginRight: '15px' }}>骑士：{jobs['骑士']}</span><span>龙骑士：{jobs['龙骑']}</span></li>
+                                <li><span style={{ marginRight: '15px' }}>法师：{jobs['法师']}</span><span>幻术师：{jobs['幻术']}</span></li>
+                                <li><span style={{ marginRight: '15px' }}>精灵：{jobs['妖精']}</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div className={styles.center}>
                     <div className={styles.video}>
-                        <iframe src="https://www.douyu.com/1811143" frameborder="0"></iframe>
+                        {/* <embed width="425" height="240" allownetworking="all" allowscriptaccess="always" src="https://staticlive.douyucdn.cn/common/share/play.swf?room_id=3299845" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash" /> */}
                     </div>
                     <div className={styles.market}>
                         <div className={styles.innerItem} style={{ marginRight: '3px', flex: "1" }}>
@@ -146,6 +184,7 @@ const Index = ({ dispatch, items, className }) => {
 
 export default connect((state) => ({
     items: state.index.items.slice(0, 9),
+    gamerInfo: state.index.gamerInfo,
     className: 'announcement'
 }))(Index);
 

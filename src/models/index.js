@@ -3,11 +3,16 @@ export default {
   namespace: 'index',
   state: {
     items: [],
+    gamerInfo: []
   },
   reducers: {
     save(state, { payload: { data: items } }) {
       console.log({ ...state, items });
       return { ...state, items };
+    },
+    saveInfo(state, { payload: { data: gamerInfo } }) {
+      console.log({ ...state, gamerInfo });
+      return { ...state, gamerInfo };
     },
   },
   effects: {
@@ -15,6 +20,15 @@ export default {
       const { data, headers } = yield call(homeService.fetch, { page });
       yield put({
         type: 'save',
+        payload: {
+          data: data.data,
+        },
+      });
+    },
+    *getGamerInfo({ payload: { } }, { call, put }) {
+      const { data, headers } = yield call(homeService.getGamerInfo, {});
+      yield put({
+        type: 'saveInfo',
         payload: {
           data: data.data,
         },
@@ -44,6 +58,7 @@ export default {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/') {
           dispatch({ type: 'fetch', payload: query });
+          dispatch({ type: 'getGamerInfo', payload: query });
         }
       });
     },

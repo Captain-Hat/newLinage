@@ -113,7 +113,7 @@ class RegistForm extends Component {
 
       <div>
         <div className={styles.text}>
-          <div style={{textAlign:'center'}}>用户协议</div>
+          <div style={{ textAlign: 'center' }}>用户协议</div>
           <p>一、总则</p>
           <p>1.1因为我们喜欢这款游戏并且热爱Java技术，这个测试服仅为了研究天堂1模拟器的运行原理，游戏版权和运营权归NC和腾讯，如果玩家通过我们的测试服务器喜欢上了这款游戏，请支持正版游戏。官方网站:http://tiantang.qq.com/ </p>
           <p>1.2用户在注册前，应当仔细阅读本协议，同意并遵守本协议方可成为注册会员。</p>
@@ -167,6 +167,21 @@ class RegistForm extends Component {
                 }],
               })(
                 <Input placeholder={'请确认密码'} style={{ width: '242px' }} type="password" onBlur={null} />
+                )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="邮箱"
+              hasFeedback
+            >
+              {getFieldDecorator('email', {
+                rules: [{
+                  required: true, message: '请输入你的邮箱',
+                }, {
+                  pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/, message: '请输入正确的邮箱'
+                }],
+              })(
+                <Input placeholder={'请输入你的邮箱'} style={{ width: '242px' }} type="" />
                 )}
             </FormItem>
             {/* <FormItem

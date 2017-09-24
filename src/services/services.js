@@ -9,6 +9,12 @@ export function fetch({ page }) {
     id: 2
   })
 }
+export function getGamerInfo({ page }) {
+  // return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.get(`/api/getonline`, {
+
+  })
+}
 export function sumit(values) {
   // return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
   return axios.post(`/api/registration`,

@@ -356,7 +356,7 @@ class LensList extends Component {
         subMenu: subItems
       })
       // npc暂不调接口
-      if (key == 'none' || 'task' || 'treasure_box') {
+      if (key == 'none' || key == 'task' || key == 'treasure_box') {
         this.setState({ tableDataSource: [] })
         return
       }

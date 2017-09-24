@@ -427,7 +427,7 @@ class LensList extends Component {
           for (var key in classes) {
             if (+record[key]) {
               // users.push(equipProps.whoUse[key])
-              users.push(<span className={styles.detailItem}>{classes[key]}</span>)
+              users.push(<span key={key} className={styles.detailItem}>{classes[key]}</span>)
             }
           }
           return (<div className={styles.tdBox}>{users}</div>)
@@ -605,7 +605,7 @@ class LensList extends Component {
         for (var key in classes) {
           if (+record[key]) {
             // users.push(equipProps.whoUse[key])
-            users.push(<span className={styles.detailItem}>{classes[key]}</span>)
+            users.push(<span key={key} className={styles.detailItem}>{classes[key]}</span>)
           }
         }
         return (<div className={styles.tdBox}>{users}</div>)

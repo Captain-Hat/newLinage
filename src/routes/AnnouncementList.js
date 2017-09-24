@@ -1,7 +1,7 @@
 
-import styles from './AnnouncementList.css';
+import styles from './AnnouncementList.less';
 import React, { Component } from 'react'
-import { Input, Table, Pagination, message, Button } from 'antd';
+import { Input, Table, Pagination, message, Button, Menu } from 'antd';
 import { Link } from 'dva/router';
 import axios from "axios";
 import qs from 'qs';
@@ -59,9 +59,11 @@ class AnnouncementList extends Component {
     this.loadData()
   }
   render() {
+    const span = <span className={styles.articlePre}>[置顶]</span>
     const columns = [{
+      className: styles.item,
       key: 'item',
-      render: (text, record) => <Link to="/Article"><a href="#">{record.item}</a></Link>,
+      render: (text, record) => <Link to="/Article"><a href="#">{span}{record.item}</a></Link>,
     },
     {
       className: styles.alignCenter,
@@ -72,6 +74,26 @@ class AnnouncementList extends Component {
 
     return (
       <div className={styles.normal}>
+        <Menu
+          className={styles.menu}
+          theme="dark"
+          mode="horizontal"
+        // selectedKeys={[this.state.selectedKeys]}
+        //onClick={this.changeItem.bind(this, false)}
+        >
+          <Menu.Item key="etcitem">
+            <a href="javascript:;">综合公告</a>
+          </Menu.Item>
+          <Menu.Item key="weapon">
+            <a href="javascript:;">游戏说明</a>
+          </Menu.Item>
+          <Menu.Item key="armor">
+            <a href="javascript:;">活动</a>
+          </Menu.Item>
+          <Menu.Item key="update">
+            <a href="javascript:;">更新与修复</a>
+          </Menu.Item>
+        </Menu>
         <Table
           className="announcement"
           dataSource={this.state.tableDataSource}
@@ -87,7 +109,9 @@ class AnnouncementList extends Component {
           }}
 
         />
-        <Button type="primary"><Link to="/addAnnouncement">写公告</Link></Button>
+        <div className={styles.btnBox}>
+          <Button type="primary"><Link to="/addAnnouncement">写公告</Link></Button>
+        </div>
       </div>
     );
   }

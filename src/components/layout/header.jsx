@@ -53,15 +53,18 @@ function Header({ dispatch, location }) {
         <Menu.Item key="/friendHelp">
           <Link to="/friendHelp">友情赞助</Link>
         </Menu.Item>
+        <Menu.Item key="/aboutUs">
+          <Link to="/aboutUs">关于我们</Link>
+        </Menu.Item>
         {/* <Menu.Item key="/album">
           <Link to="/album">精彩截图</Link>
         </Menu.Item> */}
         <Menu.Item key="/login" style={{ paddingRight: "0", paddingLeft: "60px" }}>
           <Link to="/login">登录</Link>
         </Menu.Item>
-        <Menu.Item key="/logout" style={{ paddingLeft: "0", marginLeft: "8px" }}>
+        {/* <Menu.Item key="/logout" style={{ paddingLeft: "0", marginLeft: "8px" }}>
           <a>登出</a>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </header>
   );

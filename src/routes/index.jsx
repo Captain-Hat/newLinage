@@ -37,13 +37,12 @@ const Index = ({ dispatch, items, className }) => {
                     <div className={styles.announceList}>
                         <div style={{ background: 'transparent', marginBottom: "20px" }}>
                             <Button className={styles.annouTop} type="default" size="small" ghost>综合公告</Button>
-                            <Button className={styles.annouTop} type="default" size="small" ghost>更新</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>游戏说明</Button>
                             <Button className={styles.annouTop} type="default" size="small" ghost>活动</Button>
-                            <Button className={styles.annouTop} type="default" size="small" ghost>免责申明</Button>
-                            <Button className={styles.annouTop} type="default" size="small" ghost>关于我们</Button>
+                            <Button className={styles.annouTop} type="default" size="small" ghost>更新与修复</Button>
                         </div>
                         <Mytable className={className} items={items} />
-                        <div style={{ textAlign: "right",marginTop:'10px',paddingRight:'16px' }}>
+                        <div style={{ textAlign: "right", marginTop: '10px', paddingRight: '16px' }}>
                             <Link className={styles.myLink} style={{ fontSize: "13px" }} to="/announcementList">more</Link>
                         </div>
                     </div>
@@ -64,10 +63,7 @@ const Index = ({ dispatch, items, className }) => {
                 </div>
                 <div className={styles.center}>
                     <div className={styles.video}>
-                        <video src="http://200004500.vod.myqcloud.com/200004500_44e60aba1da111e689690f47f5e05cec.f30.mp4" controls="controls" width="100%" height="auto" >
-                            {/* <source src='E:\GIT\newLinage\src\assets\vedio.rmvb' /> */}
-                            您的浏览器不支持网页视频。
-                        </video>
+                        <iframe src="https://www.douyu.com/1811143" frameborder="0"></iframe>
                     </div>
                     <div className={styles.market}>
                         <div className={styles.innerItem} style={{ marginRight: '3px', flex: "1" }}>

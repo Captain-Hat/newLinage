@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
+import { message } from 'antd';
 import styles from './Article.less';
-
+import axios from "axios";
+import qs from 'qs';
+import moment from 'moment'
 class Article extends Component {
   constructor(props) {
     super(props)
@@ -9,28 +12,48 @@ class Article extends Component {
 
     }
   }
+  loadData(param) {
+    axios.get('/api/getdetail', {
+      params: {
+        item_id: this.props.location.state.id,
+        type: 'web_notice'
+      }
+    })
+      .then((res) => {
+        this.setState({
+          date: moment(res.data.data[0].date).format('YYYY-MM--DD'),
+          content: res.data.data[0].content,
+          title: res.data.data[0].item,
+          type: res.data.data[0].type,
+        })
+      })
+      .catch((err) => {
+        message.warning("请求错误");
+      });
+  }
+
+  componentDidMount() {
+    this.loadData()
+  }
+
   render() {
     return (
       <div className={styles.normal}>
         <div className={styles.head}>
-          <h2>这是一个公告的标题</h2>
+          <h2>{this.state.title}</h2>
           <div className={styles.tipHolder}>
             <span className={styles.tip}>作者： 周柏杨</span>
-            <span className={styles.tip}>日期： 2017-08-15</span>
-            <span className={styles.tip}>分类： 游戏公告</span>
+            <span className={styles.tip}>日期：{this.state.date}</span>
+            <span className={styles.tip}>分类： {this.state.type}</span>
           </div>
         </div>
         <div className={styles.body}>
-          <p>我的长辈A，是一位大学教授，他的妻子被安排在同个大学当图书管理员，他妻子的父母也是大学教授。A不仅是老师，还是大学里主管后勤的小官员，他常年和大学里小超市的老板娘姘居，长达十几年，据说此事他们学校无人不知。今年A退休了，携妻子回老家定居。他们的女儿嫁在本地，生了外孙，A变成了一个慈祥的外公。</p>
-          <p>上个月我回老家，爸妈带我去A家拜访退休后的两人，我却只记住了他当年那位美丽的妻子脸上如今疲惫而满足的笑容。我想，她终于可以放心过剩下的一辈子了。</p>
-          <p>我的长辈L，是一位机关单位的老干部。她老公二十年多年都没有上班，很喜欢赌博。有的时候赢一些钱回家，有的时候从家里偷一些钱拿出去填补输的漏洞。她睁一只眼闭一只眼，骂骂咧咧过了三十年。去年女儿嫁到外地，今年刚生了孩子。她还没退休，她老公主动提出要一个人去看女儿，她觉得很欣慰，因为女儿怀孕的时候让他去探望，他嫌累，没去。于是她给了他5000块钱，让他自己坐车，买东西去女婿家。结果女儿打电话问“爸爸怎么还没到”，她明白了他竟是为从她这骗钱才扯的借口要去看女儿，如今定是输光了钱，不敢回家，也不见踪影。</p>
-          <p>我的长辈L，是一位机关单位的老干部。她老公二十年多年都没有上班，很喜欢赌博。有的时候赢一些钱回家，有的时候从家里偷一些钱拿出去填补输的漏洞。她睁一只眼闭一只眼，骂骂咧咧过了三十年。去年女儿嫁到外地，今年刚生了孩子。她还没退休，她老公主动提出要一个人去看女儿，她觉得很欣慰，因为女儿怀孕的时候让他去探望，他嫌累，没去。于是她给了他5000块钱，让他自己坐车，买东西去女婿家。结果女儿打电话问“爸爸怎么还没到”，她明白了他竟是为从她这骗钱才扯的借口要去看女儿，如今定是输光了钱，不敢回家，也不见踪影。</p>
-          <p>我的长辈L，是一位机关单位的老干部。她老公二十年多年都没有上班，很喜欢赌博。有的时候赢一些钱回家，有的时候从家里偷一些钱拿出去填补输的漏洞。她睁一只眼闭一只眼，骂骂咧咧过了三十年。去年女儿嫁到外地，今年刚生了孩子。她还没退休，她老公主动提出要一个人去看女儿，她觉得很欣慰，因为女儿怀孕的时候让他去探望，他嫌累，没去。于是她给了他5000块钱，让他自己坐车，买东西去女婿家。结果女儿打电话问“爸爸怎么还没到”，她明白了他竟是为从她这骗钱才扯的借口要去看女儿，如今定是输光了钱，不敢回家，也不见踪影。</p>
+         { this.state.content}
         </div>
-        <div className={styles.footer}>
+        {/* <div className={styles.footer}>
           <a className={styles.pre} href="javascript:;">《 上一篇</a>
           <a className={styles.next} href="javascript:;">下一篇 》 </a>
-        </div>
+        </div> */}
       </div>
     )
   }

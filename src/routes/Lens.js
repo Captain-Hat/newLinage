@@ -8,72 +8,7 @@ import _ from 'underscore'
 import { routerRedux, Link } from 'dva/router';
 // 写死的照片
 import monsterImg from '../assets/mo059.gif';
-let npcData = [
-  {
-    "gfxid": "34",
-    "name": "鳄鱼",
-    "agro": "1",//主动
-    "ac": "5",
-    "size": "large",
-    "exp": "6",
-    "lawful": "12",
-    "lvl": "10",
-    "mr": "1",//抗魔
-    "hp": "1",
-    "mp": "1",
-    "str": "1",
-    "dex": "1",
-    "con": "0",
-    "intel": "0",
-    "wis": "2",
-    "agrocoi": "1",//看穿隐身
-    "agrososc": "1",//看穿变身
-    "tamble": "1"
-  },
-  {
-    "gfxid": "34",
-    "name": "王八",
-    "agro": "0",//主动
-    "ac": "5",
-    "size": "large",
-    "exp": "6",
-    "lawful": "iron",
-    "lvl": "10",
-    "mr": "1",//抗魔
-    "hp": "1",
-    "mp": "1",
-    "str": "1",
-    "dex": "1",
-    "con": "0",
-    "intel": "0",
-    "wis": "2",
-    "agrocoi": "0",//看穿隐身
-    "agrososc": "0",//看穿变身
-    "tamble": "1"
-  }
-  ,
-  {
-    "gfxid": "34",
-    "name": "兔子",
-    "agro": "0",//主动
-    "ac": "5",
-    "size": "large",
-    "exp": "6",
-    "lawful": "iron",
-    "lvl": "10",
-    "mr": "1",//抗魔
-    "hp": "1",
-    "mp": "1",
-    "str": "1",
-    "dex": "1",
-    "con": "0",
-    "intel": "0",
-    "wis": "2",
-    "agrocoi": "0",//看穿隐身
-    "agrososc": "0",//看穿变身
-    "tamble": "1"
-  }
-]
+
 let magic_doll = [
   {
     "name": "一个魔法娃娃",
@@ -92,14 +27,15 @@ let magic_doll = [
     'effect_chance': '8',
     'exp': '8',
     'exp_chance': '8',
-
     'maxhp': '23',
     'maxmp': '6',
+
     'hit': '6',//攻击成功
     "bow_hit": "3",
     "bow_dmg": "8",
     "dmg_evasion_chance": "10",//回避概率
     "weight_reduction": "34",
+
     'mr': '6',
     'sp': '6',
     'str': '5',
@@ -204,8 +140,50 @@ const weaponDetail = {
     dex: '敏捷',
     intl: '智力',
     wis: '精神',
-    cha: '魅力'
+    cha: '魅力',
+    ac: '防御',
+    // hpr: '血量恢复',
+    // hpr_time: '每分钟',//
+    // mpr: '蓝量回复',
+    // mpr_time: '每分钟',
 
+    dmg: '5',//额外伤害
+    // dmg_chance: "2",//概率打出额外伤害，如果0 100
+
+    dmg_reduction: "6",
+    // dmg_reduction_chance: "20",
+
+    effect: '8',
+    // effect_chance: '8',
+    exp: '',
+    // exp_chance: '8',
+    maxhp: '最大血量',
+    maxmp: '最大蓝量',
+    hit: '攻击成功',//攻击成功
+    bow_hit: "弓的命中率",
+    bow_dmg: "弓的打击值",
+    dmg_evasion_chance: "回避概率",//回避概率
+    weight_reduction: "负重增加",
+
+    // mr: '6',
+    // sp: '6',
+    str: '力量',
+    con: '体质',
+    dex: '敏捷',
+    intl: '智力',
+    wis: '精神',
+    // cha: '8',
+    water: '水属性防御',
+    fire: '火属性防御',
+    wind: '风属性防御',
+    earth: '土属性防御',
+    regist_stun: '昏迷耐性',
+    regist_stone: '石化抗性',
+    regist_sleep: '昏睡抗性',
+    regist_freeze: '混乱抗性',
+    regist_sustain: '支撑抗性',
+    regist_blind: '致盲抗性',
+    make_itemid: '一个礼物',
   },
 
   orNot: {
@@ -386,13 +364,13 @@ class LensList extends Component {
             pre = '受诅咒的'
           }
           // {{pathname:"/select", hash:'#ahash', query:{foo: 'bar', boo:'boz'}, state:{data:'miao'}  }}
-          return <Link to={{ pathname: '/equipDetail', state: { name: record.name } }} > {pre + record.name} </Link >
+          return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {pre + record.name} </Link >
         }
       }, {
         className: styles.mainProp,
         key: 'main',
         render: (text, record) => {
-          let weight = this.state.selectedKeys == 'weapon' || 'etcitem' ? record.weight : record.weight / 1000
+          let weight = record.weight / 1000;
           return (<div className={styles.tdBox}>
             {+record.dmg_small ? <span className={styles.detailItem}>{'攻击：' + record.dmg_small + '/' + record.dmg_large}</span> : null}
             {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null}
@@ -438,7 +416,7 @@ class LensList extends Component {
         className: styles.rightCol,
         key: 'name',
         render: (text, record) => {
-          return <Link to="/equipDetail?id=1" > {record.note}</Link >
+          return <span>{record.note}</span >
         }
       },
       {
@@ -448,7 +426,7 @@ class LensList extends Component {
           let parts = []
           record.list.map((v, k) => {
             parts.push(<Tooltip title={v.name}>
-              <img key={k} className={styles.setImg} src={'http://localhost/newlineage/inv_gfx/' + v.invgfx + '.png'} alt={v.name} />
+              <Link to={{ pathname: '/equipDetail', state: { row: record } }} > <img key={k} className={styles.setImg} src={'http://localhost/newlineage/inv_gfx/' + v.invgfx + '.png'} alt={v.name} /></Link>
             </Tooltip>)
           })
           return (<div className={styles.setImgsBox}>
@@ -493,7 +471,7 @@ class LensList extends Component {
         className: styles.rightCol,
         key: 'name',
         render: (text, record) => {
-          return <Link to="/equipDetail?id=1" > {record.name}</Link >
+          return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {record.name}</Link >
         }
       },
       {
@@ -563,17 +541,17 @@ class LensList extends Component {
       className: styles.rightCol,
       key: 'name',
       render: (text, record) => {
-        return <Link to="/equipDetail?id=1" > {record.name}</Link >
+        return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {record.name}</Link >
       }
     },
     {
       className: styles.mainProp,
       key: 'main',
       render: (text, record) => {
-        let weight = this.state.selectedKeys == 'weapon' || 'etcitem' ? record.weight : record.weight / 1000
+        let weight = record.weight / 1000
         return (<div className={styles.tdBox}>
           {+record.dmg_small ? <span className={styles.detailItem}>{'攻击：' + record.dmg_small + '/' + record.dmg_large}</span> : null}
-          {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null}
+          {/* {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null} */}
           {record.material ? <span className={styles.detailItem}>{'材质：' + record.material}</span> : null}
           {weight ? <span className={styles.detailItem}>{'重量：' + weight}</span> : null}
           {+record.safenchant ? <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span> : null}
@@ -585,7 +563,7 @@ class LensList extends Component {
       className: styles.detail,
       key: 'detail',
       render: (text, record) => {
-        return <Detail rowData={record} data={weaponDetail} />
+        return <Detail type={'magic_doll'} rowData={record} data={weaponDetail} />
       }
     },
     {
@@ -683,7 +661,7 @@ class LensList extends Component {
             pagination={{ pageSize: this.page.pageSize, current: this.page.current, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
             onChange={(pagination, filters, sorter) => {
               const newParam = { current: pagination.current, pageSize: pagination.pageSize }
-              this.loadData(newParam);
+              this.loadData(newParam, this.state.selectedKeys == 'armor_set' ? '/api/armorset' : '/api/equipList');
               this.page.pageSize = pagination.pageSize
               this.page.current = pagination.current
             }}
@@ -715,7 +693,73 @@ class Detail extends Component {
       // haste_item: '永久加速效果',//判断1显示
       // max_lvl: '最大等级',//:
       // min_lvl: '最小等级',//:
-      if (key == 'grade') {
+      // dmg_reduction effect  exp
+      if (key == 'ac') {
+        if (this.props.type == 'magic_doll') {
+          if (+rowData[key] > 0) {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}+{rowData[key]}</span>)
+          } else {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}{rowData[key]}</span>)
+          }
+
+        }
+      }
+      else if (key == 'dmg_evasion_chance' || key == 'weight_reduction') {
+        if (+rowData[key]) {
+          detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}+{rowData[key]}% </span>)
+        }
+      }
+      // else if (){
+
+      // }
+      else if (key == 'dmg_reduction') {
+        if (+rowData[key]) {
+          if (+rowData['dmg_reduction_chance']) {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>{rowData['dmg_reduction_chance']}%的概率减伤{rowData['dmg_reduction']} </span>)
+          } else if (rowData['dmg_reduction_chance'] == '0') {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>100%的概率减伤{rowData['dmg_reduction']} </span>)
+          }
+        }
+      }
+      else if (key == 'effect') {
+        if (+rowData[key]) {
+          detailsLeft.push(<span key={key} className={styles.detailItem}>有{rowData['effect']}%的概率使目标中毒 </span>)
+        }
+      }
+      else if (key == 'exp') {
+        if (+rowData[key]) {
+          detailsLeft.push(<span key={key} className={styles.detailItem}>有{rowData['exp_chance']}%的概率获得{rowData['exp']}%的经验 </span>)
+
+        }
+      }
+      else if (key == 'dmg') {
+        if (+rowData[key]) {
+          if (+rowData['dmg_chance']) {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>{rowData['dmg_chance']}%的概率打出额外伤害{rowData['dmg']} </span>)
+          } else if (rowData['dmg_chance'] == '0') {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>100%的概率打出额外伤害{rowData['dmg']} </span>)
+          }
+        }
+      }
+      else if (key == 'hpr') {
+        if (+rowData[key]) {
+          if (+rowData['hpr_time']) {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>每{rowData['hpr_time']}分钟恢复血量{rowData['hpr']} </span>)
+          } else {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>血量恢复{rowData['hpr']} </span>)
+          }
+        }
+      }
+      else if (key == 'mpr') {
+        if (+rowData[key]) {
+          if (+rowData['mpr_time']) {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>每{rowData['mpr_time']}分钟恢复蓝量{rowData['mpr']} </span>)
+          } else {
+            detailsLeft.push(<span key={key} className={styles.detailItem}>蓝量恢复{rowData['mpr']} </span>)
+          }
+        }
+      }
+      else if (key == 'grade') {
         if (rowData[key] && rowData[key] != '-1') {
           let lev;
           switch (rowData[key]) {
@@ -751,12 +795,15 @@ class Detail extends Component {
       } else if (key == 'haste_item') {
         rowData[key] == '1' ? detailsLeft.push(<span key={key} className={styles.detailItem}>永久加速效果</span>) : null;
       } else {
+
         if (+rowData[key]) {
+
           if (+rowData[key] > 0) {
             detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}+{rowData[key]}</span>)
           } else {
             detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}{rowData[key]}</span>)
           }
+
         }
       }
     }

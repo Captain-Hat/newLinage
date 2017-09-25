@@ -12,7 +12,7 @@ export default {
       const { data, headers } = yield call(usersService.sumit, values);
       if (data.errcode == 200) {
         message.success('注册成功')
-      }
+    
       // Inside Effects
       yield put(routerRedux.push('/'))
       yield put({
@@ -20,6 +20,10 @@ export default {
           location: { pathname: '/home' }
         }
       })
+    }else{
+      message.warning('注册失败！')
+      return
+    }
     }
   },
   subscriptions: {},

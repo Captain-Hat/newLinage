@@ -81,7 +81,7 @@ class EquipDetail extends Component {
     return (
       <div className={styles.normal}>
         <div className={styles.head}>
-          <img src={'http://localhost/newlineage/inv_gfx/' + this.state.rowData.invgfx + '.png'} alt="" />
+          <img src={'/inv_gfx/' + this.state.rowData.invgfx + '.png'} alt="" />
           <span>{pre + this.state.rowData.name}</span>
         </div>
         <div className={styles.tableTitle}>掉落概况</div>

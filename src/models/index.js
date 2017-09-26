@@ -100,6 +100,8 @@ export default {
         if (pathname === '/') {
           dispatch({ type: 'fetch', payload: query });
           // 循环调用
+          dispatch({ type: 'getGamerInfo', payload: query });
+          dispatch({ type: 'getGamerInfo2', payload: query });
           setInterval(() => {
             dispatch({ type: 'getGamerInfo', payload: query });
             dispatch({ type: 'getGamerInfo2', payload: query });

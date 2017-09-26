@@ -352,7 +352,7 @@ class LensList extends Component {
       {
         className: styles.leftCol,
         key: 'item',
-        render: (text, record) => <img src={'http://localhost/newlineage/inv_gfx/' + record.invgfx + '.png'} alt="" />,
+        render: (text, record) => <img src={'/inv_gfx/' + record.invgfx + '.png'} alt="" />,
       }, {
         className: styles.rightCol,
         key: 'name',
@@ -426,7 +426,7 @@ class LensList extends Component {
           let parts = []
           record.list.map((v, k) => {
             parts.push(<Tooltip title={v.name}>
-              <Link to={{ pathname: '/equipDetail', state: { row: record } }} > <img key={k} className={styles.setImg} src={'http://localhost/newlineage/inv_gfx/' + v.invgfx + '.png'} alt={v.name} /></Link>
+              <Link to={{ pathname: '/equipDetail', state: { row: record } }} > <img key={k} className={styles.setImg} src={'/inv_gfx/' + v.invgfx + '.png'} alt={v.name} /></Link>
             </Tooltip>)
           })
           return (<div className={styles.setImgsBox}>
@@ -535,7 +535,7 @@ class LensList extends Component {
     const magic_dollColunms = [{
       className: styles.leftCol,
       key: 'item',
-      render: (text, record) => <img src={'http://localhost/newlineage/inv_gfx/' + record.invgfx + '.png'} alt="" />,
+      render: (text, record) => <img src={'/inv_gfx/' + record.invgfx + '.png'} alt="" />,
     },
     {
       className: styles.rightCol,

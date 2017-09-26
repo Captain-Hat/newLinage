@@ -3,100 +3,45 @@ import styles from './EquipDetail.less';
 import React, { Component } from 'react'
 import { Input, Table, Pagination, message, Menu, Button } from 'antd';
 import axios from "axios";
+import qs from 'qs';
 import { routerRedux } from 'dva/router';
 // import mainProperty from "./share/columns.js"
 
-const mainProperty = [
+const dropList = [
   {
-    title: 'AC',
-    key: 'AC',
+    title: '掉落怪物',
+    key: 'mob_name',
     render: (text, record, index) => {
       // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-      return <span>AC</span>
+      return <span>{record.mob_name}</span>
     }
   },
   {
-    title: 'AC',
-    key: 'ACtext',
-    dataIndex: "ac"
-  },
-  {
-    title: 'safe',
-    key: 'safe',
+    title: '掉落数量',
+    key: 'count',
     render: (text, record, index) => {
       // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-      return <span>safe</span>
+      return <span>{record.min}~{record.max}</span>
+    },
+  },
+  {
+    title: '掉落概率',
+    key: 'dropPoint',
+    render: (text, record, index) => {
+      // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
+      return <span>{record.chance / 10000 + '%'}</span>
     }
+  },
 
-  },
-  {
-    title: 'safe',
-    key: 'safetext',
-    dataIndex: "safe"
-  },
-  {
-    title: 'type',
-    key: 'type',
-    render: (text, record, index) => {
-      // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-      return <span>type</span>
-    }
-
-  },
-  {
-    title: 'type',
-    key: 'typetext',
-    dataIndex: "type"
-  }
 ];
-const marketInfo = [{
-  title: '物品',
-  key: 'AC1',
-  render: (text, record, index) => {
-    // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-    return <span>AC</span>
-  }
-},
-{
-  title: '+',
-  key: 'ACtext1',
-  dataIndex: "ac"
-},
-{
-  title: '名字',
-  key: 'safe1',
-  render: (text, record, index) => {
-    // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-    return <span>王者圣剑</span>
-  }
 
-},
-{
-  title: '数量',
-  key: 'safetext1',
-  dataIndex: "safe"
-},
-{
-  title: '总价',
-  key: 'safetext2',
-  dataIndex: "safe"
-},
-{
-  title: '购买',
-  key: 'type1',
-  render: (text, record, index) => {
-    // 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格行/列合并
-    return <Button>前往购买</Button>
-  }
-}
-];
 class EquipDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tableLoading: false,
-      mainTable: [],
-      marketInfoTable: []
+      dorpTable: [],
+      rowData: props.location.state.row
     };
     this.page = {
       pageNumber: 1,
@@ -105,70 +50,51 @@ class EquipDetail extends Component {
     }
   }
   loadData(param) {
-    this.setState({
-      mainTable: [],
-      tableLoading: true,
-    })
-    param = param || {};
-    const newParam = Object.assign({
-      pageNumber: this.page.pageNumber,
-      pageSize: this.page.pageSize
-    }, param)
-    axios.post('/api/detail', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
+    axios.get('/api/getdetail', {
+      params: {
+        item_id: this.state.rowData.item_id,
+        type: 'droplist'
+      }
     })
       .then((res) => {
-        let data = res.data
-        this.page.total = data.option.total;
         this.setState({
-          tableLoading: false,
-          mainTable: data.data
+          dorpTable: res.data.data
         })
+        message.success("操作成功");
       })
       .catch((err) => {
-        this.setState({
-          tableLoading: false,
-          mainTable: [],
-        })
         message.warning("请求错误");
       });
   }
 
   componentDidMount() {
     this.loadData()
-    console.log(this.props)
   }
 
   render() {
-
-
-    console.log(mainProperty)
+    let pre = '';
+    if (this.state.rowData.bless == '0') {
+      pre = '受祝福的'
+    } else if (this.state.rowData.bless == '2') {
+      pre = '受诅咒的'
+    }
     return (
       <div className={styles.normal}>
         <div className={styles.head}>
-          <img src="http://pic.duowan.com/df/1104/166256478415/166256500012.jpg" alt="" />
-          <span>圣剑</span>
+          <img src={'http://localhost/newlineage/inv_gfx/' + this.state.rowData.invgfx + '.png'} alt="" />
+          <span>{pre + this.state.rowData.name}</span>
         </div>
+        <div className={styles.tableTitle}>掉落概况</div>
         <Table
           className="equipment"
-          dataSource={this.state.mainTable}
-          columns={mainProperty}
-          rowKey={record => record.id}
-          showHeader={false}
-          bordered={true}
-          pagination={false}
-        />
-        <h2 className={styles.title}>商城信息</h2>
-        <Table
-          className="equipment"
-          dataSource={this.state.mainTable}
-          columns={marketInfo}
+          dataSource={this.state.dorpTable}
+          columns={dropList}
           rowKey={record => record.id}
           showHeader={true}
           bordered={true}
           pagination={false}
         />
+
       </div>
     );
   }

@@ -137,15 +137,14 @@ class AddAnnouncement extends Component {
     }
 
     if (this.props.location.state && this.props.location.state.id) {
-      axios.get('/newlineage/api/noticemanger', {
-        params: {
-          content: this.state.inputHtml,
-          type: this.state.type,
-          item: this.state.title,
-          item_id: this.props.location.state.id,
-          action: 1
-        }
-      }, {
+      axios.post('/newlineage/api/noticemanger', qs.stringify({
+
+        content: this.state.inputHtml,
+        type: this.state.type,
+        item: this.state.title,
+        item_id: this.props.location.state.id,
+        action: 1
+      }), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           }

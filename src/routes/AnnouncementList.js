@@ -68,12 +68,16 @@ class AnnouncementList extends Component {
       }
       )
     } else {
-      axios.get('/newlineage/api/noticemanger', {
-        params: {
+      axios.post('/newlineage/api/noticemanger',
+        qs.stringify({
           item_id: this.state.currentId,
           action: item.key
+        }), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
         }
-      }
+
       )
         .then((res) => {
           message.success('操作成功')

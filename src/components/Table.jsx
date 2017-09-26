@@ -10,7 +10,7 @@ const ProductList = ({ items, className }) => {
   const span = <span className={styles.articlePre}>[置顶]</span>
   const columns = [{
     key: 'item',
-    render: (text, record) => <Link to="/Article"><a className={styles.itemCol} href="#">{span}{record.item}</a></Link>,
+    render: (text, record) => <Link className={styles.itemCol} to="/Article"> {span}{record.item} </Link>,
   },
   {
     className: styles.dateCol,

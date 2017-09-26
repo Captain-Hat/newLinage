@@ -22,7 +22,9 @@ import Tosell from "./routes/Tosell.js";
 
 import AddAnnouncement from "./routes/AddAnnouncement.js";
 
-import Article from "./routes/Article.js"; 
+import Article from "./routes/Article.js";
+
+import AboutUs from "./routes/AboutUs.js";
 
 function RouterConfig({
   history
@@ -45,6 +47,7 @@ function RouterConfig({
         <Route path="/Tosell" component={Tosell} />
         <Route path="/addAnnouncement" component={AddAnnouncement} />
         <Route path="/Article" component={Article} />
+        <Route path="/AboutUs" component={AboutUs} />
       </Route>
     </Router>
   );

@@ -65,7 +65,7 @@ class RegistForm extends Component {
     });
   }
   getCode = () => {
-    axios.get('/api/getVerificationCode', {
+    axios.get('/newlineage/api/getVerificationCode', {
       params: {
         type: 2
       }

@@ -50,7 +50,7 @@ class EquipDetail extends Component {
     }
   }
   loadData(param) {
-    axios.get('/api/getdetail', {
+    axios.get('/newlineage/api/getdetail', {
       params: {
         item_id: this.state.rowData.item_id,
         type: 'droplist'

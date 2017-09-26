@@ -4,20 +4,48 @@ import axios from 'axios';
 import qs from 'qs';
 
 export function fetch({ page }) {
-  // return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
-  return axios.get(`/api/showAnnouncement`, {
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.get(`/newlineage/api/showAnnouncement`, {
     id: 2
   })
 }
 export function getGamerInfo({ page }) {
-  // return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
-  return axios.get(`/api/getonline`, {
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.get(`/newlineage/api/getonline`, {
 
   })
 }
+export function getGamerInfo2({ page }) {
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.post(`/newlineage/api/getonline`, {
+
+  })
+}
+export function changeNotice(key) {
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`); 
+  return axios.post(`/newlineage/api/showAnnouncement`, qs.stringify({
+    current: 1,
+    pageSize: 10,
+    type: key
+  }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    })
+}
 export function sumit(values) {
-  // return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
-  return axios.post(`/api/registration`,
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.post(`/newlineage/api/registration`,
+    qs.stringify(values), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    }
+  )
+}
+export function getUpdate(values) {
+  // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+  return axios.post(`/newlineage/api/showAnnouncement`,
     qs.stringify(values), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -26,7 +54,7 @@ export function sumit(values) {
   )
 }
 export function remove(id) {
-  return request(`/api/users/${id}`, {
+  return request(`/newlineage/api/users/${id}`, {
     method: 'DELETE',
   });
 }

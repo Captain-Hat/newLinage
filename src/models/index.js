@@ -3,7 +3,9 @@ export default {
   namespace: 'index',
   state: {
     items: [],
-    gamerInfo: []
+    gamerInfo: [],
+    gamerInfo2: [],
+    updateItem: []
   },
   reducers: {
     save(state, { payload: { data: items } }) {
@@ -13,6 +15,18 @@ export default {
     saveInfo(state, { payload: { data: gamerInfo } }) {
       console.log({ ...state, gamerInfo });
       return { ...state, gamerInfo };
+    },
+    saveInfo2(state, { payload: { data: gamerInfo2 } }) {
+      console.log({ ...state, gamerInfo2 });
+      return { ...state, gamerInfo2 };
+    },
+    getNewtable(state, { payload: { data: items } }) {
+      console.log({ ...state, items });
+      return { ...state, items };
+    },
+    getUpdate(state, { payload: { data: updateItem } }) {
+      console.log({ ...state, updateItem });
+      return { ...state, updateItem };
     },
   },
   effects: {
@@ -29,6 +43,33 @@ export default {
       const { data, headers } = yield call(homeService.getGamerInfo, {});
       yield put({
         type: 'saveInfo',
+        payload: {
+          data: data.data,
+        },
+      });
+    },
+    *getGamerInfo2({ payload: { } }, { call, put }) {
+      const { data, headers } = yield call(homeService.getGamerInfo2, {});
+      yield put({
+        type: 'saveInfo2',
+        payload: {
+          data: data.data,
+        },
+      });
+    },
+    *changeNotice({ payload: key }, { call, put }) {
+      const { data, headers } = yield call(homeService.changeNotice, key);
+      yield put({
+        type: 'getNewtable',
+        payload: {
+          data: data.data,
+        },
+      });
+    },
+    *updateInfo({ payload: page }, { call, put }) {
+      const { data, headers } = yield call(homeService.getUpdate, page);
+      yield put({
+        type: 'getUpdate',
         payload: {
           data: data.data,
         },
@@ -58,7 +99,12 @@ export default {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/') {
           dispatch({ type: 'fetch', payload: query });
-          dispatch({ type: 'getGamerInfo', payload: query });
+          // 循环调用
+          setInterval(() => {
+            dispatch({ type: 'getGamerInfo', payload: query });
+            dispatch({ type: 'getGamerInfo2', payload: query });
+          }, 60000)
+          dispatch({ type: 'updateInfo', payload: { type: 4, current: 1, pageSize: 10 } });
         }
       });
     },

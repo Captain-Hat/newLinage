@@ -150,7 +150,7 @@
 .rightTop {
   width: 100%;
   height: 240px;
-  padding: 10px 0;
+  padding: 10px 20px;
   margin-bottom: 3px;
   color: #b8c6cc;
   background-color: rgba(255, 255, 255, 0.1);
@@ -161,7 +161,7 @@
   height: 310px;
   flex: 1;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px 0;
+  padding: 20px 0 0 20px;
   color: #b8c6cc;
 
   a {
@@ -182,7 +182,7 @@
 
 .title {
   font-size: 13px;
-  padding-left: 20px;
+  color: #fff;
 }
 
 .funcs {
@@ -206,7 +206,6 @@
   margin-top: 10px;
 
   li {
-    padding-left: 20px;
     line-height: 23px;
 
     &:hover {
@@ -231,4 +230,34 @@
   border: none;
   margin-right: 6px;
   font-size: 14px;
+}
+
+.menu {
+  line-height: 40px;
+  background-color: transparent;
+  font-size: 14px;
+  border: none;
+
+  li {
+    padding: 0 15px;
+  }
+}
+
+.updateLink {
+  display: inline-block;
+  width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: #b8c6cc!important;
+  padding: 3px 0;
+
+  &:hover {
+    a {
+      color: #395A8C;
+    }
+
+  }
 }

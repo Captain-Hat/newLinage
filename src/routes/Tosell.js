@@ -40,7 +40,7 @@ class LensList extends Component {
       pageNumber: this.page.pageNumber,
       pageSize: this.page.pageSize
     }, param)
-    axios.post('/api/users', {
+    axios.post('/newlineage/api/users', {
       firstName: 'Fred',
       lastName: 'Flintstone'
     })

@@ -247,7 +247,7 @@ class LensList extends Component {
       loading: value
     })
   }
-  loadData(param = {}, url = "/api/equipList") {
+  loadData(param = {}, url = '/newlineage/api/equipList') {
     this.setState({
       tableDataSource: [],
       tableLoading: true,
@@ -262,7 +262,7 @@ class LensList extends Component {
     // 同步页码
     this.page.current = newParam.current;
     this.page.pageSize = newParam.pageSize;
-    if (this.state.selectedKeys == 'npc') { url = '/api/npc' }
+    if (this.state.selectedKeys == 'npc') { url = '/newlineage/api/npc' }
     axios.post(url, qs.stringify(newParam)
     ).then((res) => {
       let data = res.data
@@ -318,10 +318,10 @@ class LensList extends Component {
       // 需要更换接口的几个情况
       let url;
       if (key == "armor_set") {
-        url = '/api/armorset'
+        url = '/newlineage/api/armorset'
       }
       if (key == "npc") {
-        url = '/api/npc'
+        url = '/newlineage/api/npc'
       }
       this.loadData({
         current: 1,
@@ -565,29 +565,6 @@ class LensList extends Component {
       render: (text, record) => {
         return <Detail type={'magic_doll'} rowData={record} data={weaponDetail} />
       }
-    },
-    {
-      className: styles.whoUse,
-      key: 'whoUse',
-      render: (text, record) => {
-        let classes = {
-          use_knight: '骑士',
-          use_elf: '精灵',
-          use_mage: '法师',
-          use_royalL: '王族',
-          use_darkelf: '黑暗精灵',
-          use_dragonknight: '龙骑',
-          use_illusionist: '幻术师',
-        }
-        let users = []
-        for (var key in classes) {
-          if (+record[key]) {
-            // users.push(equipProps.whoUse[key])
-            users.push(<span key={key} className={styles.detailItem}>{classes[key]}</span>)
-          }
-        }
-        return (<div className={styles.tdBox}>{users}</div>)
-      }
     }];
     let whichCol;
     if (this.state.selectedKeys == 'armor_set') {
@@ -661,7 +638,7 @@ class LensList extends Component {
             pagination={{ pageSize: this.page.pageSize, current: this.page.current, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
             onChange={(pagination, filters, sorter) => {
               const newParam = { current: pagination.current, pageSize: pagination.pageSize }
-              this.loadData(newParam, this.state.selectedKeys == 'armor_set' ? '/api/armorset' : '/api/equipList');
+              this.loadData(newParam, this.state.selectedKeys == 'armor_set' ? '/newlineage/api/armorset' : '/newlineage/api/equipList');
               this.page.pageSize = pagination.pageSize
               this.page.current = pagination.current
             }}
@@ -698,7 +675,7 @@ class Detail extends Component {
         if (this.props.type == 'magic_doll') {
           if (+rowData[key] > 0) {
             detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}+{rowData[key]}</span>)
-          } else {
+          } else if (+rowData[key] < 0) {
             detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}{rowData[key]}</span>)
           }
 

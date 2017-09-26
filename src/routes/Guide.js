@@ -31,7 +31,7 @@ class Guide extends Component {
       pageNumber: this.page.pageNumber,
       pageSize: this.page.pageSize
     }, param)
-    axios.post('/api/showAnnouncement', qs.stringify({
+    axios.post('/newlineage/api/showAnnouncement', qs.stringify({
       current: 1,
       pageSize: 10,
       type: 2

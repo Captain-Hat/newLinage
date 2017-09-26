@@ -30,10 +30,10 @@ export default {
     }
   },
   "proxy": {
-    "/api": {
-      "target": "http://localhost/newlineage/api/",
+    "/newlineage": {
+      "target": "http://localhost/newlineage",
       "changeOrigin": true,
-      "pathRewrite": { "^/api": "" }
+      "pathRewrite": { "^/newlineage": "" }
     }
   }
 };

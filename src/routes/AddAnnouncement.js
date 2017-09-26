@@ -7,7 +7,7 @@ import styles from './AddAnnouncement.less';
 import findIndex from "lodash/findIndex";
 import uniqBy from "lodash/uniqBy";
 import LzEditor from 'react-lz-editor'
-import { Select, Button, message } from 'antd';
+import { Select, Button, message, Input } from 'antd';
 import { hashHistory } from 'react-router'
 
 const Option = Select.Option
@@ -19,8 +19,9 @@ class AddAnnouncement extends Component {
     this.state = {
       htmlContent: ``,
       responseList: [],
-      type: 1,
-      inputHtml: ""
+      type: '1',
+      inputHtml: "",
+      title: ''
     }
     this.receiveHtml = this.receiveHtml.bind(this);
     this.receiveMarkdown = this.receiveMarkdown.bind(this);
@@ -34,7 +35,27 @@ class AddAnnouncement extends Component {
     console.log("recieved HTML content", content);
     this.setState({ inputHtml: content })
   }
-  componentDidMount() { }
+  componentDidMount() {
+    if (this.props.location.state && this.props.location.state.id) {
+      axios.get('/newlineage/api/getdetail', {
+        params: {
+          item_id: this.props.location.state.id,
+          type: 'web_notice'
+        }
+      })
+        .then((res) => {
+          this.setState({
+            inputHtml: res.data.data[0].content,
+            htmlContent: res.data.data[0].content,
+            title: res.data.data[0].item,
+            type: res.data.data[0].type,
+          })
+        })
+        .catch((err) => {
+          message.warning("请求错误");
+        });
+    }
+  }
   receiveMarkdown(content) {
     console.log("recieved markdown content", content);
   }
@@ -105,26 +126,71 @@ class AddAnnouncement extends Component {
     this.setState({ type: e })
   }
   publish() {
-    // hashHistory.push('/')
-    axios.post('/api/announceArticle', qs.stringify({
-      content: this.state.inputHtml,
-      type: this.state.type
-    }), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+
+    if (!this.state.title) {
+      message.warning('请输入标题', 2)
+      return
+    }
+    if (!this.state.inputHtml) {
+      message.warning('请输入公告内容', 2)
+      return
+    }
+
+    if (this.props.location.state && this.props.location.state.id) {
+      axios.get('/newlineage/api/noticemanger', {
+        params: {
+          content: this.state.inputHtml,
+          type: this.state.type,
+          item: this.state.title,
+          item_id: this.props.location.state.id,
+          action: 1
         }
-      })
-      .then((res) => {
-        let data = res.data
-        if (data.errcode == 200) {
+      }, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        })
+        .then((res) => {
+          // let data = res.data
+
           // 发布成功跳到列表
+          message.success('操作成功')
+          hashHistory.push('/AnnouncementList')
 
-        }
-      })
-      .catch((err) => {
-        message.warning("请求错误");
-      });
+        })
+        .catch((err) => {
+          message.warning("请求错误");
+        });
 
+    } else {
+      axios.post('/newlineage/api/announceArticle', qs.stringify({
+        content: this.state.inputHtml,
+        type: this.state.type,
+        item: this.state.title
+      }), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        })
+        .then((res) => {
+          let data = res.data
+          if (data.errcode == 200) {
+            // 发布成功跳到列表
+            message.success('操作成功')
+            hashHistory.push('/AnnouncementList')
+          }
+        })
+        .catch((err) => {
+          message.warning("请求错误");
+        });
+    }
+
+
+  }
+  inputTitle(e) {
+    this.setState({
+      title: e.target.value
+    })
   }
   render() {
     let policy = "";
@@ -170,17 +236,20 @@ class AddAnnouncement extends Component {
         <div className={styles.top}>
           <label htmlFor="">公告分类：</label>
           <Select defaultValue="1" style={{ width: 120 }} onChange={this.handleChange.bind(this)}>
-            <Option value="1">bug修复</Option>
-            <Option value="2">节日活动</Option>
-            <Option value="3">更新预告</Option>
+            <Option value="1">综合公告</Option>
+            <Option value="2">游戏说明</Option>
+            <Option value="3">活动</Option>
+            <Option value="4">更新与修复</Option>
           </Select>
+          <label htmlFor="">公告标题：</label>
+          <Input value={this.state.title} onChange={this.inputTitle.bind(this)} placeholder={'请输入标题'} style={{ width: '200px' }} />
         </div>
         <LzEditor
           active={true}
           importContent={this.state.htmlContent}
           cbReceiver={this.receiveHtml}
           uploadProps={uploadProps} />
-        <Button type="primary" style={{ marginTop: "20px" }} onClick={this.publish.bind(this)}>确认发布</Button>
+        <Button type="primary" style={{ marginTop: "20px" }} onClick={this.publish.bind(this)}>提交</Button>
       </div>
     );
   }

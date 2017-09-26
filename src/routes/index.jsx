@@ -57,6 +57,7 @@ const Index = ({ dispatch, items, gamerInfo, className }) => {
                 break;
         }
     })
+    const showVideo = '<embed width="425" height="300" allownetworking="all" allowscriptaccess="always" src="https://staticlive.douyucdn.cn/common/share/play.swf?room_id=3299845" quality="high" bgcolor="#f00" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash">'
     return (
         <div className={styles.cardContainer}>
             <div className={styles.flexBox}>
@@ -100,8 +101,7 @@ const Index = ({ dispatch, items, gamerInfo, className }) => {
                     </div>
                 </div>
                 <div className={styles.center}>
-                    <div className={styles.video}>
-                        {/* <embed width="425" height="240" allownetworking="all" allowscriptaccess="always" src="https://staticlive.douyucdn.cn/common/share/play.swf?room_id=3299845" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash" /> */}
+                    <div className={styles.video} dangerouslySetInnerHTML={{ __html: showVideo }}>
                     </div>
                     <div className={styles.market}>
                         <div className={styles.innerItem} style={{ marginRight: '3px', flex: "1" }}>
@@ -130,8 +130,8 @@ const Index = ({ dispatch, items, gamerInfo, className }) => {
                                 <li>客户服务：</li>
                                 <li>客服qq：2562186390</li>
                                 <li>客服微信：MaskedMonkey</li>
-                                <li>客服微信：2562186390@qq.com</li>
-                                <li>工作时间：18:30-21.30 每天</li>
+                                {/* <li>客服微信：2562186390@qq.com</li> */}
+                                {/* <li>工作时间：18:30-21.30 每天</li> */}
                             </ul>
                         </div>
                         <div className={styles.qqLeague}>
@@ -139,8 +139,8 @@ const Index = ({ dispatch, items, gamerInfo, className }) => {
                                 <li>&nbsp;</li>
                                 <li>qq群（2000）：539891495</li>
                                 <li style={{ color: 'red' }}>点击加入qq群</li>
-                                <li>官方YY频道：21267952</li>
-                                <li style={{ color: 'red' }}>点击进入官方YY</li>
+                                {/* <li>官方YY频道：21267952</li> */}
+                                {/* <li style={{ color: 'red' }}>点击进入官方YY</li> */}
                             </ul>
                         </div>
                     </div>

@@ -178,7 +178,7 @@ const Index = ({ dispatch, items, gamerInfo, gamerInfo2, updateItem, className }
                             <ul>
                                 <li>客户服务：</li>
                                 <li>客服qq：2562186390</li>
-                                <li>客服微信：MaskedMonkey</li>
+                                <li>客服微信：MaskedMokey</li>
                                 {/* <li>客服微信：2562186390@qq.com</li> */}
                                 {/* <li>工作时间：18:30-21.30 每天</li> */}
                             </ul>

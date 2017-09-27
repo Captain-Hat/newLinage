@@ -26,3 +26,15 @@
 //编辑:1  	置顶:2	  删除:3	  游戏公告:4  	服务器设置:5 	游戏攻略:6
 
 攻城和服务器数据 url：/api/getonline，在线数据get方法，攻城post 方法
+
+0928
+8.验证页面的公告。
+6.魔法娃娃缺少max_hp,max_mp,str,strcon,dex,wis,int,cha,sp,mr,water,fire,wind,earth,exp,exp_chance。
+4.公告分类。1234
+1.需要登录接口，判断发帖权限、编辑帖子。
+7.4个地址需要接口。下载3和赞助1
+5.取消置顶接口。
+2.套装变身数据。根据polyid查polymorphs表最后传我name。
+3.套装返回的list需要传我item_id点击单个前台调详情。
+9.pet_item有的字段都给我。宠物装备图鉴。
+10.npc:明天讨论。

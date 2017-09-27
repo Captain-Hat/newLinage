@@ -115,6 +115,9 @@ class AnnouncementList extends Component {
         <Menu.Item key="3">
           删除
         </Menu.Item>
+        <Menu.Item key="4">
+          取消置顶
+        </Menu.Item>
       </Menu>
     );
     const span = <span className={styles.articlePre}>[置顶]</span>

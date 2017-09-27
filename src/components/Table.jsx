@@ -10,7 +10,7 @@ const ProductList = ({ items, className }) => {
   const span = <span className={styles.articlePre}>[置顶]</span>
   const columns = [{
     key: 'item',
-    render: (text, record) => <Link className={styles.itemCol} to="/Article"> {span}{record.item} </Link>,
+    render: (text, record) => <Link className={styles.itemCol} to={{ pathname: '/article', state: { id: record.id } }} >{record.istop == '1' ? span : null}{record.item ? record.item : '无标题'}</Link>,
   },
   {
     className: styles.dateCol,

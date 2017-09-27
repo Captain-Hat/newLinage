@@ -6,6 +6,7 @@ import axios from "axios";
 import qs from 'qs';
 import { routerRedux } from 'dva/router';
 // import mainProperty from "./share/columns.js"
+import { hashHistory } from 'react-router'
 
 const dropList = [
   {
@@ -34,7 +35,10 @@ const dropList = [
   },
 
 ];
-
+message.config({
+  top: 100,
+  duration: 2,
+});
 class EquipDetail extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +64,7 @@ class EquipDetail extends Component {
         this.setState({
           dorpTable: res.data.data
         })
-        message.success("操作成功");
+        // message.success("操作成功");
       })
       .catch((err) => {
         message.warning("请求错误");
@@ -70,7 +74,9 @@ class EquipDetail extends Component {
   componentDidMount() {
     this.loadData()
   }
-
+  bakcList() {
+    hashHistory.push('/Lens')
+  }
   render() {
     let pre = '';
     if (this.state.rowData.bless == '0') {
@@ -80,9 +86,11 @@ class EquipDetail extends Component {
     }
     return (
       <div className={styles.normal}>
+        <Button onClick={this.bakcList.bind(this)} type='primary' style={{ marginBottom: '20px' }}>返回</Button>
         <div className={styles.head}>
           <img src={'/newlineage/inv_gfx/' + this.state.rowData.invgfx + '.png'} alt="" />
           <span>{pre + this.state.rowData.name}</span>
+
         </div>
         <div className={styles.tableTitle}>掉落概况</div>
         <Table

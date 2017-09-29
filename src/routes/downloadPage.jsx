@@ -1,44 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  connect
-} from 'dva';
-import { Button } from 'antd';
-import styles from './downloadPage.less';
 
-function downloadPage({
-  location
-}) {
-  function download(url) {
+import PropTypes from 'prop-types';
+import { Button, message } from 'antd';
+import styles from './downloadPage.less';
+import React, { Component } from 'react'
+import axios from "axios";
+class downloadPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      urls: [{}, {}, {}],
+    };
+
+  }
+  download(url) {
     window.open(url)
   }
+  componentDidMount() {
+    axios.get('/newlineage/api/urlServlet', {
+      params: {
+      }
+    }).then((res) => {
+      this.setState({
+        urls: res.data.data
+      })
 
-  return (
-    <div className={styles.normal}>
-      <div className={styles.container}>
-        <div style={{ marginBottom: "20px" }}>
-          <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
-            onClick={download.bind(null, 'http://www.baidu.com')}>客户端(包括登陆器)--百度云</a></Button>
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
-            onClick={download.bind(null, 'http://www.qq.com')}>登陆器--百度云</a></Button>
-        </div>
-        <div>
-          <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
-            onClick={download.bind(null, 'http://www.qq.com')}>虚拟机--百度云</a></Button>
+    })
+      .catch((err) => {
+        message.warning("请求错误");
+      });
+  }
+
+  render() {
+    let [url1, url2, url3] = [this.state.urls[0].url, this.state.urls[1].url, this.state.urls[2].url]
+    return (
+      <div className={styles.normal}>
+        <div className={styles.container}>
+          <div style={{ marginBottom: "20px" }}>
+            <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
+              onClick={this.download.bind(null, url1)}>客户端(包括登陆器)--百度云</a></Button>
+          </div>
+          <div style={{ marginBottom: "20px" }}>
+            <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
+              onClick={this.download.bind(null, url2)}>登陆器--百度云</a></Button>
+          </div>
+          <div>
+            <Button style={{ width: "200px" }} type="primary" size='large'><a target="_blank"
+              onClick={this.download.bind(null, url3)}>虚拟机--百度云</a></Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-downloadPage.propTypes = {
-  location: PropTypes.object.isRequired
-};
+export default downloadPage
 
-function mapStateToProps() {
-  return {};
-}
-
-export default connect(mapStateToProps)(downloadPage);

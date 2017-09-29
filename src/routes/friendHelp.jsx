@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Button, Checkbox, Modal } from 'antd';
 import styles from './friendHelp.less';
+import axios from "axios";
 const confirm = Modal.confirm;
+let url;
 class friendHelp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
-      agreement: false
+      agreement: false,
     };
   }
   changeSelect = (e) => {
@@ -19,10 +21,21 @@ class friendHelp extends Component {
   }
   moneyHelp = () => {
     if (this.state.agreement) {
-      window.open('http://www.qq.com')
+      window.open(url)
     } else {
       this.warning()
     }
+  }
+  componentDidMount = () => {
+    axios.get('/newlineage/api/urlServlet', {
+      params: {
+      }
+    }).then((res) => {
+      url = res.data.data[3].url
+    })
+      .catch((err) => {
+        message.warning("请求错误");
+      });
   }
   warning = () => {
     Modal.warning({

@@ -45,7 +45,6 @@ class EquipDetail extends Component {
     this.state = {
       tableLoading: false,
       dorpTable: [],
-      rowData: props.location.state.row
     };
     this.page = {
       pageNumber: 1,
@@ -56,7 +55,7 @@ class EquipDetail extends Component {
   loadData(param) {
     axios.get('/newlineage/api/getdetail', {
       params: {
-        item_id: this.state.rowData.item_id,
+        item_id: this.props.rowData.item_id,
         type: 'droplist'
       }
     })
@@ -74,27 +73,26 @@ class EquipDetail extends Component {
   componentDidMount() {
     this.loadData()
   }
-  bakcList() {
-    hashHistory.push('/Lens')
-  }
+
   render() {
     let pre = '';
-    if (this.state.rowData.bless == '0') {
+    if (this.props.rowData.bless == '0') {
       pre = '受祝福的'
-    } else if (this.state.rowData.bless == '2') {
+    } else if (this.props.rowData.bless == '2') {
       pre = '受诅咒的'
     }
     return (
-      <div className={styles.normal}>
-        <Button onClick={this.bakcList.bind(this)} type='primary' style={{ marginBottom: '20px' }}>返回</Button>
-        <div className={styles.head}>
-          <img src={'/newlineage/inv_gfx/' + this.state.rowData.invgfx + '.png'} alt="" />
-          <span>{pre + this.state.rowData.name}</span>
+      <div>
 
+        <div className={styles.head}>
+          <img src={'/newlineage/inv_gfx/' + this.props.rowData.invgfx + '.png'} alt="" />
+          <span>{pre + this.props.rowData.name} </span>
+          <Button className={styles.backBtn} onClick={this.props.backList} type='primary'>返回</Button>
+          <div style={{ clear: 'both' }}></div>
         </div>
         <div className={styles.tableTitle}>掉落概况</div>
         <Table
-          className="equipment"
+          className={styles.detailTable}
           dataSource={this.state.dorpTable}
           columns={dropList}
           rowKey={record => record.id}

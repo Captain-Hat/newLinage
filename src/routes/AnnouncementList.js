@@ -5,7 +5,8 @@ import { Input, Table, Pagination, message, Button, Menu, Dropdown, Icon } from 
 import { Link } from 'dva/router';
 import axios from "axios";
 import qs from 'qs';
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
+import CookieTool from './share/cookie';
 class AnnouncementList extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,8 @@ class AnnouncementList extends Component {
       tableDataSource: [],
       currentType: "1",
       currentId: '',
-      currentRowData: {}
+      currentRowData: {},
+      allow: false
     };
     this.page = {
       current: 1,
@@ -58,6 +60,13 @@ class AnnouncementList extends Component {
   }
   componentDidMount() {
     this.loadData()
+    // 判断登录
+    let cookie = CookieTool.getCookie('accessInfo');
+    if (cookie && cookie.access == '200') {
+      this.setState({
+        allow: true
+      })
+    }
   }
   handleArticle(item) {
     if (item.key == '1') {
@@ -120,7 +129,8 @@ class AnnouncementList extends Component {
         </Menu.Item>
       </Menu>
     );
-    const span = <span className={styles.articlePre}>[置顶]</span>
+    const span = <span className={styles.articlePre}>[置顶]</span>;
+    let allowed = this.state.allow
     const columns = [{
       className: styles.item,
       key: 'item',
@@ -135,12 +145,19 @@ class AnnouncementList extends Component {
       className: styles.handle,
       key: 'handle',
       render: (text, record) => {
-        return <Dropdown overlay={menu} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            <Icon type="down" />
-          </a>
-        </Dropdown>
+        if (allowed) {
+          return <Dropdown overlay={menu} trigger={['click']}>
+            <a className="ant-dropdown-link" href="#">
+              <Icon type="down" />
+            </a>
+          </Dropdown>
+
+        } else {
+          return null
+        }
       }
+
+
     },
     ];
 
@@ -184,7 +201,7 @@ class AnnouncementList extends Component {
 
         />
         <div className={styles.btnBox}>
-          <Button type="primary"><Link to="/addAnnouncement">写公告</Link></Button>
+          {this.state.allow ? <Button type="primary"><Link to="/addAnnouncement">写公告</Link></Button> : null}
         </div>
       </div>
     );

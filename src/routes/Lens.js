@@ -1,14 +1,15 @@
 
 import styles from './Lens.less';
 import React, { Component } from 'react'
-import { Input, Table, Pagination, message, Menu, Spin, Tooltip } from 'antd';
+import { Input, Table, Pagination, message, Menu, Spin, Tooltip, Button } from 'antd';
 import axios from "axios";
 import qs from 'qs';
 import _ from 'underscore'
 import { routerRedux, Link } from 'dva/router';
 // 写死的照片
 // import monsterImg from '../assets/mo059.gif';  
-import { menuItems, weaponDetail } from './share/publicConfig'
+import { menuItems, weaponDetail } from './share/publicConfig';
+import EquipDetail from './EquipDetail';
 class LensList extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +20,18 @@ class LensList extends Component {
       selectedKeys: "weapon",
       subselectedKeys: "dagger",
       subMenu: [],
-      loading: false
+      loading: false,
+      detail: false,
+      detailRecord: {}
     };
     this.page = {
       current: 1,
       pageSize: 10,
       total: 100
+    }
+    this.key = {
+      selectedKeys: '',
+      subselectedKeys: ''
     }
   }
   showLoading(value) {
@@ -36,6 +43,7 @@ class LensList extends Component {
     this.setState({
       tableDataSource: [],
       tableLoading: true,
+      detail: false
     })
     this.showLoading(true)
     const newParam = Object.assign({
@@ -47,7 +55,7 @@ class LensList extends Component {
     // 同步页码
     this.page.current = newParam.current;
     this.page.pageSize = newParam.pageSize;
-    if (this.state.selectedKeys == 'npc') { url = '/newlineage/api/npc' }
+    if (this.key.selectedKeys == 'npc') { url = '/newlineage/api/npc' }
     axios.post(url, qs.stringify(newParam)
     ).then((res) => {
       let data = res.data
@@ -81,6 +89,7 @@ class LensList extends Component {
       })
     } else {
       this.setState({ selectedKeys: item.key })
+      this.key.selectedKeys = item.key
       this.getItems(item.key)
     }
 
@@ -108,6 +117,11 @@ class LensList extends Component {
       if (key == "npc") {
         url = '/newlineage/api/npc'
       }
+      // npc暂不调接口
+      if (key == 'none' || key == 'task' || key == 'treasure_box' || key == 'npc' || key == 'make') {
+        this.setState({ tableDataSource: [] })
+        return
+      }
       this.loadData({
         current: 1,
         type: key,
@@ -119,7 +133,7 @@ class LensList extends Component {
         subMenu: subItems
       })
       // npc暂不调接口
-      if (key == 'none' || key == 'task' || key == 'treasure_box') {
+      if (key == 'none' || key == 'task' || key == 'treasure_box' || key == 'npc' || key == 'make') {
         this.setState({ tableDataSource: [] })
         return
       }
@@ -131,7 +145,17 @@ class LensList extends Component {
     }
 
   }
-
+  showDetail(detail) {
+    this.setState({
+      detail: true,
+      detailRecord: detail
+    })
+  }
+  bakcList() {
+    this.setState({
+      detail: false
+    })
+  }
   render() {
     const normalColunms = [
       {
@@ -149,7 +173,7 @@ class LensList extends Component {
             pre = '受诅咒的'
           }
           // {{pathname:"/select", hash:'#ahash', query:{foo: 'bar', boo:'boz'}, state:{data:'miao'}  }}
-          return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {pre + record.name} </Link >
+          return <a href='javascript:;' onClick={this.showDetail.bind(this, record)}> {pre + record.name} </a >
         }
       }, {
         className: styles.mainProp,
@@ -211,7 +235,9 @@ class LensList extends Component {
           let parts = []
           record.list.map((v, k) => {
             parts.push(<Tooltip title={v.name}>
-              <Link to={{ pathname: '/equipDetail', state: { row: record } }} > <img key={k} className={styles.setImg} src={'/newlineage/inv_gfx/' + v.invgfx + '.png'} alt={v.name} /></Link>
+              <a href='javascript:;' onClick={this.showDetail.bind(this, v)}>
+                <img key={k} className={styles.setImg} src={'/newlineage/inv_gfx/' + v.invgfx + '.png'} alt={v.name} />
+              </a >
             </Tooltip>)
           })
           return (<div className={styles.setImgsBox}>
@@ -256,7 +282,7 @@ class LensList extends Component {
         className: styles.rightCol,
         key: 'name',
         render: (text, record) => {
-          return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {record.name}</Link >
+          return <a href='javascript:;' onClick={this.showDetail.bind(this, record)}> {record.name} </a >
         }
       },
       {
@@ -327,7 +353,7 @@ class LensList extends Component {
         className: styles.rightCol,
         key: 'name',
         render: (text, record) => {
-          return <Link to={{ pathname: '/equipDetail', state: { row: record } }} > {record.name}</Link >
+          return <a href='javascript:;' onClick={this.showDetail.bind(this, record)}> {record.name} </a >
         }
       },
       {
@@ -413,23 +439,33 @@ class LensList extends Component {
           >
             {this.state.subMenu}
           </Menu>
-          <Table
-            className="equipment"
-            dataSource={this.state.tableDataSource}
-            //dataSource={magic_doll}
-            columns={whichCol}
-            rowKey={record => record.id}
-            showHeader={false}
-            bordered={true}
-            pagination={{ pageSize: this.page.pageSize, current: this.page.current, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
-            onChange={(pagination, filters, sorter) => {
-              const newParam = { current: pagination.current, pageSize: pagination.pageSize }
-              this.loadData(newParam, this.state.selectedKeys == 'armor_set' ? '/newlineage/api/armorset' : '/newlineage/api/equipList');
-              this.page.pageSize = pagination.pageSize
-              this.page.current = pagination.current
-            }}
 
-          />
+          {
+            this.state.detail
+              ?
+              <div>
+
+                <EquipDetail rowData={this.state.detailRecord} backList={this.bakcList.bind(this)} />
+              </div>
+              :
+              <Table
+                className="equipment"
+                dataSource={this.state.tableDataSource}
+                //dataSource={magic_doll}
+                columns={whichCol}
+                rowKey={record => record.id}
+                showHeader={false}
+                bordered={true}
+                pagination={{ pageSize: this.page.pageSize, current: this.page.current, total: this.page.total, showSizeChanger: true, showQuickJumper: true }}
+                onChange={(pagination, filters, sorter) => {
+                  const newParam = { current: pagination.current, pageSize: pagination.pageSize }
+                  this.loadData(newParam, this.state.selectedKeys == 'armor_set' ? '/newlineage/api/armorset' : '/newlineage/api/equipList');
+                  this.page.pageSize = pagination.pageSize
+                  this.page.current = pagination.current
+                }}
+
+              />
+          }
         </div>
       </Spin>
     );
@@ -486,7 +522,7 @@ class Detail extends Component {
       }
       else if (key == 'effect') {
         if (+rowData[key]) {
-          detailsLeft.push(<span key={key} className={styles.detailItem}>有{rowData['effect']}%的概率使目标中毒 </span>)
+          detailsLeft.push(<span key={key} className={styles.detailItem}>有{rowData['effect_chance']}%的概率使目标中毒 </span>)
         }
       }
       else if (key == 'exp') {

@@ -103,7 +103,7 @@ function Header({ dispatch, location, accessInfo }) {
           <Link to="/album">精彩截图</Link>
         </Menu.Item> */}
           {
-            accessInfo.access
+            accessInfo.userName
               ?
               <Menu.Item key="/login" style={{ paddingRight: "0", paddingLeft: "60px" }}>
                 <span>
@@ -122,7 +122,7 @@ function Header({ dispatch, location, accessInfo }) {
         </Menu>
       </header>
       {
-        accessInfo.access
+        accessInfo.userName
           ?
           <span className={styles.userName}>{accessInfo.userName}</span>
           :

@@ -6,7 +6,7 @@ import qs from 'qs';
 export function fetch({ page }) {
   // return request(`/newlineage/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
   return axios.get(`/newlineage/api/showAnnouncement`, {
-    id: 2
+    params: { type: 1 }
   })
 }
 export function getGamerInfo({ page }) {

@@ -234,7 +234,8 @@ class AddAnnouncement extends Component {
       <div className={styles.normal}>
         <div className={styles.top}>
           <label htmlFor="">公告分类：</label>
-          <Select defaultValue="2" style={{ width: 120 }} onChange={this.handleChange.bind(this)}> 
+          <Select defaultValue="1" style={{ width: 120 }} onChange={this.handleChange.bind(this)}> 
+            <Option value="1">综合公告</Option>
             <Option value="2">游戏说明</Option>
             <Option value="3">活动</Option>
             <Option value="4">更新与修复</Option>

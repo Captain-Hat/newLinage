@@ -126,7 +126,7 @@ export const weaponDetail = {
     regist_freeze: '混乱抗性',
     regist_sustain: '支撑抗性',
     regist_blind: '致盲抗性',
-    make_itemid: '一个礼物',
+    makename: '每10分钟奖励物品',
   },
 
   orNot: {

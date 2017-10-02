@@ -493,7 +493,12 @@ class Detail extends Component {
       // max_lvl: '最大等级',//:
       // min_lvl: '最小等级',//:
       // dmg_reduction effect  exp
-      if (key == 'ac') {
+      if (key == 'makename') {
+        if (rowData[key]) {
+          detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}: {rowData[key]}</span>)
+        }
+      }
+      else if (key == 'ac') {
         if (this.props.type == 'magic_doll') {
           if (+rowData[key] > 0) {
             detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}+{rowData[key]}</span>)

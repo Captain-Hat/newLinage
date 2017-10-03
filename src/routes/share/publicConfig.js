@@ -113,7 +113,7 @@ export const weaponDetail = {
     str: '力量',
     con: '体质',
     dex: '敏捷',
-    intl: '智力',
+    int: '智力',
     wis: '精神',
     // cha: '8',
     water: '水属性防御',

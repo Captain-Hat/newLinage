@@ -495,7 +495,7 @@ class Detail extends Component {
       // dmg_reduction effect  exp
       if (key == 'makename') {
         if (rowData[key]) {
-          detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}: {rowData[key]}</span>)
+          detailsLeft.push(<span key={key} className={styles.detailItem}>{equipProps.show[key]}:  {rowData[key]}</span>)
         }
       }
       else if (key == 'ac') {

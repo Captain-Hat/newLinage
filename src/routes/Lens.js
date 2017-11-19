@@ -185,7 +185,11 @@ class LensList extends Component {
             {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null}
             {record.material ? <span className={styles.detailItem}>{'材质：' + record.material}</span> : null}
             {weight ? <span className={styles.detailItem}>{'重量：' + weight}</span> : null}
-            {+record.safenchant ? <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span> : null}
+            {record.safenchant != '-1' ?
+              <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span>
+              :
+              <span className={styles.detailItem}>不可强化</span>
+            }
           </div>)
 
         }
@@ -255,7 +259,11 @@ class LensList extends Component {
             {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null}
             {record.material ? <span className={styles.detailItem}>{'材质：' + record.material}</span> : null}
             {weight ? <span className={styles.detailItem}>{'重量：' + weight}</span> : null}
-            {+record.safenchant ? <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span> : null}
+            {record.safenchant != '-1' ?
+              <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span>
+              :
+              <span className={styles.detailItem}>不可强化</span>
+            }
           </div>)
 
         }
@@ -366,7 +374,11 @@ class LensList extends Component {
             {/* {+record.ac ? <span className={styles.detailItem}>{'防御：' + record.ac}</span> : null} */}
             {record.material ? <span className={styles.detailItem}>{'材质：' + record.material}</span> : null}
             {weight ? <span className={styles.detailItem}>{'重量：' + weight}</span> : null}
-            {+record.safenchant ? <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span> : null}
+            {record.safenchant != '-1' ?
+              <span className={styles.detailItem}>{'安定值：' + record.safenchant}</span>
+              :
+              <span className={styles.detailItem}>不可强化</span>
+            }
           </div>)
 
         }

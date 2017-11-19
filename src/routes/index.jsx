@@ -79,8 +79,13 @@ const Index = ({ dispatch, items, gamerInfo, gamerInfo2, updateItem, className }
         let siege = []
         gamerInfo2.map((v, k) => {
             if (v.type == '1') {
+                // 2017-11-04 20:00:00.0
+                let originTime = v.war_time.split(' ');
+                let pre = originTime[0].substring(5) + ' ';
+                let mid = originTime[1].split(':');
+                let after = mid[0] + ':' + mid[1] + ' — ' + (+mid[0] + 2) + ':' + mid[1]
                 siege.push(
-                    <li key={k} style={{ color: 'red' }}>{v.name}：{v.war_time}</li>
+                    <li key={k} style={{ color: 'red' }}>{v.name}：{pre + after}</li>
                 )
             } else {
                 siege.push(
@@ -159,7 +164,7 @@ const Index = ({ dispatch, items, gamerInfo, gamerInfo2, updateItem, className }
                         <div className={styles.innerItem} style={{ marginRight: '3px', width: "90px", background: 'transparent', fontSize: '14px' }}>
                             <Link to="/registration"><div className={styles.btn}>帐号注册</div></Link>
                             <Link to="/downloadPage"><div className={styles.btn}>下载中心</div></Link>
-                            <Link to="/friendHelp"><div className={styles.btn}>赞助我们</div></Link>
+                            <Link to="/friendHelp"><div style={{height:'50px'}} className={styles.btn}>赞助我们</div></Link>
                         </div>
                         <div className={styles.innerItem} style={{ width: "125px", paddingLeft: '14px', paddingTop: "5px" }}>
                             <ul>
